@@ -1,0 +1,196 @@
+/* =====================================================
+   Header Component Styles
+   ===================================================== */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-w);
+  right: 0;
+  height: var(--header-h);
+  background: rgba(2, 8, 23, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 24px;
+  z-index: 99;
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* ── Left: page title ── */
+.header-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.header-page-title {
+  font-family: var(--font-head);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.header-page-subtitle {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+
+/* ── Center: LIVE indicator ── */
+.header-live {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.live-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.live-dot-wrap {
+  position: relative;
+  width: 10px;
+  height: 10px;
+}
+
+.live-dot {
+  position: absolute;
+  inset: 0;
+  background: var(--primary);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease infinite;
+}
+
+.live-dot-ring {
+  position: absolute;
+  inset: -3px;
+  border: 1px solid var(--primary);
+  border-radius: 50%;
+  animation: pulse-ring 2s ease infinite;
+}
+
+.live-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--primary);
+  text-transform: uppercase;
+}
+
+.live-time {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  animation: glow-pulse 3s ease infinite;
+}
+
+.live-ist {
+  font-size: 9px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+/* ── Right: status chips ── */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.header-chip:hover {
+  border-color: var(--border-strong);
+}
+
+.chip-weather {
+  color: var(--secondary);
+  border-color: var(--secondary-dim);
+  background: rgba(255, 107, 53, 0.05);
+}
+
+.chip-health {
+  color: var(--primary);
+  border-color: var(--primary-dim);
+  background: rgba(0, 255, 136, 0.05);
+}
+
+.chip-health-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--primary);
+  animation: pulse-dot 3s ease infinite;
+}
+
+/* ── Context bar (below header) ── */
+.header-context-bar {
+  position: fixed;
+  top: var(--header-h);
+  left: var(--sidebar-w);
+  right: 0;
+  height: 28px;
+  background: rgba(0, 255, 136, 0.03);
+  border-bottom: 1px solid rgba(0, 255, 136, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 98;
+  backdrop-filter: blur(10px);
+}
+
+.context-bar-text {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+.context-bar-sep {
+  width: 3px;
+  height: 3px;
+  background: var(--primary-dim);
+  border-radius: 50%;
+}
+
+.context-bar-highlight {
+  color: rgba(0, 255, 136, 0.6);
+}

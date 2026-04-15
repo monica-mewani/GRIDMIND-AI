@@ -1,0 +1,1179 @@
+{
+  "meta": {
+    "project": "GRIDMIND AI",
+    "location": "Raigad District, Maharashtra, India",
+    "villages": [
+      "Bhatan",
+      "Somathne",
+      "Palaspe",
+      "Kalamboli"
+    ],
+    "total_residents": 2400,
+    "system_capacity_kw": 10,
+    "battery_capacity_kwh": 20,
+    "data_source": "Kaggle - Renewable Energy & Smart Grid Datasets",
+    "generated_at": "2026-04-15T13:56:48.019770"
+  },
+  "solar_hourly": [
+    {
+      "hour": 0,
+      "avg_solar_kw": 4.94,
+      "avg_forecast_kw": 4.97,
+      "avg_irradiance": 494.43,
+      "avg_temp": 24.85,
+      "avg_humidity": 57.17,
+      "avg_rainfall": 0.53,
+      "time_label": "12AM",
+      "weather": "Rainy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 1,
+      "avg_solar_kw": 4.72,
+      "avg_forecast_kw": 4.37,
+      "avg_irradiance": 472.41,
+      "avg_temp": 24.31,
+      "avg_humidity": 56.12,
+      "avg_rainfall": 0.56,
+      "time_label": "1AM",
+      "weather": "Rainy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 2,
+      "avg_solar_kw": 5.02,
+      "avg_forecast_kw": 5.1,
+      "avg_irradiance": 502.14,
+      "avg_temp": 25.42,
+      "avg_humidity": 59.64,
+      "avg_rainfall": 0.43,
+      "time_label": "2AM",
+      "weather": "Partly Cloudy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 3,
+      "avg_solar_kw": 4.78,
+      "avg_forecast_kw": 4.75,
+      "avg_irradiance": 477.74,
+      "avg_temp": 24.84,
+      "avg_humidity": 56.39,
+      "avg_rainfall": 0.46,
+      "time_label": "3AM",
+      "weather": "Partly Cloudy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 4,
+      "avg_solar_kw": 5.02,
+      "avg_forecast_kw": 4.85,
+      "avg_irradiance": 501.87,
+      "avg_temp": 25.87,
+      "avg_humidity": 57.57,
+      "avg_rainfall": 0.44,
+      "time_label": "4AM",
+      "weather": "Partly Cloudy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 5,
+      "avg_solar_kw": 4.87,
+      "avg_forecast_kw": 5.03,
+      "avg_irradiance": 486.6,
+      "avg_temp": 25.03,
+      "avg_humidity": 57.41,
+      "avg_rainfall": 0.43,
+      "time_label": "5AM",
+      "weather": "Partly Cloudy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 6,
+      "avg_solar_kw": 5.05,
+      "avg_forecast_kw": 5.11,
+      "avg_irradiance": 505.14,
+      "avg_temp": 25.13,
+      "avg_humidity": 62.37,
+      "avg_rainfall": 0.52,
+      "time_label": "6AM",
+      "weather": "Rainy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 7,
+      "avg_solar_kw": 4.43,
+      "avg_forecast_kw": 4.19,
+      "avg_irradiance": 443.11,
+      "avg_temp": 25.87,
+      "avg_humidity": 56.52,
+      "avg_rainfall": 0.38,
+      "time_label": "7AM",
+      "weather": "Partly Cloudy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 8,
+      "avg_solar_kw": 5.32,
+      "avg_forecast_kw": 5.11,
+      "avg_irradiance": 531.97,
+      "avg_temp": 24.75,
+      "avg_humidity": 59.88,
+      "avg_rainfall": 0.31,
+      "time_label": "8AM",
+      "weather": "Partly Cloudy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 9,
+      "avg_solar_kw": 5.58,
+      "avg_forecast_kw": 5.54,
+      "avg_irradiance": 558.29,
+      "avg_temp": 27.25,
+      "avg_humidity": 64.65,
+      "avg_rainfall": 0.67,
+      "time_label": "9AM",
+      "weather": "Rainy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 10,
+      "avg_solar_kw": 5.09,
+      "avg_forecast_kw": 5.07,
+      "avg_irradiance": 508.63,
+      "avg_temp": 26.01,
+      "avg_humidity": 55.87,
+      "avg_rainfall": 0.58,
+      "time_label": "10AM",
+      "weather": "Rainy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 11,
+      "avg_solar_kw": 5.54,
+      "avg_forecast_kw": 5.43,
+      "avg_irradiance": 554.43,
+      "avg_temp": 25.31,
+      "avg_humidity": 61.42,
+      "avg_rainfall": 0.53,
+      "time_label": "11AM",
+      "weather": "Rainy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 12,
+      "avg_solar_kw": 4.86,
+      "avg_forecast_kw": 4.82,
+      "avg_irradiance": 486.34,
+      "avg_temp": 23.88,
+      "avg_humidity": 62.93,
+      "avg_rainfall": 0.48,
+      "time_label": "12PM",
+      "weather": "Partly Cloudy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 13,
+      "avg_solar_kw": 4.71,
+      "avg_forecast_kw": 4.56,
+      "avg_irradiance": 470.88,
+      "avg_temp": 24.33,
+      "avg_humidity": 62.67,
+      "avg_rainfall": 0.35,
+      "time_label": "1PM",
+      "weather": "Partly Cloudy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 14,
+      "avg_solar_kw": 4.58,
+      "avg_forecast_kw": 4.72,
+      "avg_irradiance": 458.2,
+      "avg_temp": 24.53,
+      "avg_humidity": 58.26,
+      "avg_rainfall": 0.56,
+      "time_label": "2PM",
+      "weather": "Rainy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 15,
+      "avg_solar_kw": 5.28,
+      "avg_forecast_kw": 5.24,
+      "avg_irradiance": 527.68,
+      "avg_temp": 24.7,
+      "avg_humidity": 58.4,
+      "avg_rainfall": 0.49,
+      "time_label": "3PM",
+      "weather": "Partly Cloudy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 16,
+      "avg_solar_kw": 4.84,
+      "avg_forecast_kw": 5.08,
+      "avg_irradiance": 484.25,
+      "avg_temp": 25.91,
+      "avg_humidity": 62.72,
+      "avg_rainfall": 0.52,
+      "time_label": "4PM",
+      "weather": "Rainy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 17,
+      "avg_solar_kw": 5.9,
+      "avg_forecast_kw": 5.61,
+      "avg_irradiance": 590.06,
+      "avg_temp": 23.51,
+      "avg_humidity": 56.97,
+      "avg_rainfall": 0.61,
+      "time_label": "5PM",
+      "weather": "Rainy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 18,
+      "avg_solar_kw": 5.88,
+      "avg_forecast_kw": 5.92,
+      "avg_irradiance": 587.45,
+      "avg_temp": 24.71,
+      "avg_humidity": 69.87,
+      "avg_rainfall": 0.54,
+      "time_label": "6PM",
+      "weather": "Rainy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 19,
+      "avg_solar_kw": 4.67,
+      "avg_forecast_kw": 4.51,
+      "avg_irradiance": 466.66,
+      "avg_temp": 25.05,
+      "avg_humidity": 59.45,
+      "avg_rainfall": 0.51,
+      "time_label": "7PM",
+      "weather": "Rainy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 20,
+      "avg_solar_kw": 5.01,
+      "avg_forecast_kw": 5.19,
+      "avg_irradiance": 500.55,
+      "avg_temp": 23.98,
+      "avg_humidity": 58.77,
+      "avg_rainfall": 0.52,
+      "time_label": "8PM",
+      "weather": "Rainy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 21,
+      "avg_solar_kw": 4.39,
+      "avg_forecast_kw": 4.23,
+      "avg_irradiance": 438.56,
+      "avg_temp": 25.63,
+      "avg_humidity": 63.3,
+      "avg_rainfall": 0.74,
+      "time_label": "9PM",
+      "weather": "Rainy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 22,
+      "avg_solar_kw": 4.45,
+      "avg_forecast_kw": 4.59,
+      "avg_irradiance": 445.33,
+      "avg_temp": 25.19,
+      "avg_humidity": 51.76,
+      "avg_rainfall": 0.49,
+      "time_label": "10PM",
+      "weather": "Partly Cloudy",
+      "ai_action": "BALANCED"
+    },
+    {
+      "hour": 23,
+      "avg_solar_kw": 5.23,
+      "avg_forecast_kw": 5.34,
+      "avg_irradiance": 523.16,
+      "avg_temp": 27.84,
+      "avg_humidity": 60.68,
+      "avg_rainfall": 0.5,
+      "time_label": "11PM",
+      "weather": "Partly Cloudy",
+      "ai_action": "BALANCED"
+    }
+  ],
+  "battery_hourly": [
+    {
+      "hour": 0,
+      "avg_battery_pct": 22.5,
+      "avg_input_output": -0.43,
+      "status": "Discharging"
+    },
+    {
+      "hour": 1,
+      "avg_battery_pct": 22.56,
+      "avg_input_output": -13.29,
+      "status": "Discharging"
+    },
+    {
+      "hour": 2,
+      "avg_battery_pct": 22.79,
+      "avg_input_output": -6.78,
+      "status": "Discharging"
+    },
+    {
+      "hour": 3,
+      "avg_battery_pct": 24.03,
+      "avg_input_output": 4.06,
+      "status": "Charging"
+    },
+    {
+      "hour": 4,
+      "avg_battery_pct": 21.8,
+      "avg_input_output": 3.83,
+      "status": "Charging"
+    },
+    {
+      "hour": 5,
+      "avg_battery_pct": 22.29,
+      "avg_input_output": 3.18,
+      "status": "Charging"
+    },
+    {
+      "hour": 6,
+      "avg_battery_pct": 21.57,
+      "avg_input_output": 6.18,
+      "status": "Charging"
+    },
+    {
+      "hour": 7,
+      "avg_battery_pct": 20.66,
+      "avg_input_output": -4.19,
+      "status": "Discharging"
+    },
+    {
+      "hour": 8,
+      "avg_battery_pct": 20.33,
+      "avg_input_output": 5.1,
+      "status": "Charging"
+    },
+    {
+      "hour": 9,
+      "avg_battery_pct": 19.22,
+      "avg_input_output": -6.06,
+      "status": "Discharging"
+    },
+    {
+      "hour": 10,
+      "avg_battery_pct": 19.52,
+      "avg_input_output": 2.6,
+      "status": "Charging"
+    },
+    {
+      "hour": 11,
+      "avg_battery_pct": 19.51,
+      "avg_input_output": 2.46,
+      "status": "Charging"
+    },
+    {
+      "hour": 12,
+      "avg_battery_pct": 18.84,
+      "avg_input_output": 6.9,
+      "status": "Charging"
+    },
+    {
+      "hour": 13,
+      "avg_battery_pct": 18.36,
+      "avg_input_output": -0.27,
+      "status": "Discharging"
+    },
+    {
+      "hour": 14,
+      "avg_battery_pct": 18.32,
+      "avg_input_output": -0.95,
+      "status": "Discharging"
+    },
+    {
+      "hour": 15,
+      "avg_battery_pct": 18.96,
+      "avg_input_output": 6.14,
+      "status": "Charging"
+    },
+    {
+      "hour": 16,
+      "avg_battery_pct": 19.06,
+      "avg_input_output": 0.0,
+      "status": "Discharging"
+    },
+    {
+      "hour": 17,
+      "avg_battery_pct": 19.92,
+      "avg_input_output": -4.88,
+      "status": "Discharging"
+    },
+    {
+      "hour": 18,
+      "avg_battery_pct": 21.38,
+      "avg_input_output": -2.25,
+      "status": "Discharging"
+    },
+    {
+      "hour": 19,
+      "avg_battery_pct": 22.05,
+      "avg_input_output": -0.36,
+      "status": "Discharging"
+    },
+    {
+      "hour": 20,
+      "avg_battery_pct": 22.42,
+      "avg_input_output": 8.06,
+      "status": "Charging"
+    },
+    {
+      "hour": 21,
+      "avg_battery_pct": 21.76,
+      "avg_input_output": -2.78,
+      "status": "Discharging"
+    },
+    {
+      "hour": 22,
+      "avg_battery_pct": 21.56,
+      "avg_input_output": 1.35,
+      "status": "Charging"
+    },
+    {
+      "hour": 23,
+      "avg_battery_pct": 20.6,
+      "avg_input_output": 4.72,
+      "status": "Charging"
+    }
+  ],
+  "load_hourly": [
+    {
+      "hour": 0,
+      "avg_load_kw": 5.92,
+      "avg_forecast_kw": 6.02,
+      "avg_cost_inr": 11.01,
+      "bhatan_kw": 2.07,
+      "palaspe_kw": 1.48,
+      "somathne_kw": 1.18,
+      "kalamboli_kw": 1.18
+    },
+    {
+      "hour": 1,
+      "avg_load_kw": 5.95,
+      "avg_forecast_kw": 5.81,
+      "avg_cost_inr": 11.45,
+      "bhatan_kw": 2.08,
+      "palaspe_kw": 1.49,
+      "somathne_kw": 1.19,
+      "kalamboli_kw": 1.19
+    },
+    {
+      "hour": 2,
+      "avg_load_kw": 5.97,
+      "avg_forecast_kw": 6.09,
+      "avg_cost_inr": 12.68,
+      "bhatan_kw": 2.09,
+      "palaspe_kw": 1.49,
+      "somathne_kw": 1.19,
+      "kalamboli_kw": 1.19
+    },
+    {
+      "hour": 3,
+      "avg_load_kw": 4.68,
+      "avg_forecast_kw": 4.62,
+      "avg_cost_inr": 10.64,
+      "bhatan_kw": 1.64,
+      "palaspe_kw": 1.17,
+      "somathne_kw": 0.94,
+      "kalamboli_kw": 0.94
+    },
+    {
+      "hour": 4,
+      "avg_load_kw": 5.6,
+      "avg_forecast_kw": 5.65,
+      "avg_cost_inr": 12.14,
+      "bhatan_kw": 1.96,
+      "palaspe_kw": 1.4,
+      "somathne_kw": 1.12,
+      "kalamboli_kw": 1.12
+    },
+    {
+      "hour": 5,
+      "avg_load_kw": 5.62,
+      "avg_forecast_kw": 5.52,
+      "avg_cost_inr": 10.89,
+      "bhatan_kw": 1.97,
+      "palaspe_kw": 1.4,
+      "somathne_kw": 1.12,
+      "kalamboli_kw": 1.12
+    },
+    {
+      "hour": 6,
+      "avg_load_kw": 5.51,
+      "avg_forecast_kw": 5.56,
+      "avg_cost_inr": 12.32,
+      "bhatan_kw": 1.93,
+      "palaspe_kw": 1.38,
+      "somathne_kw": 1.1,
+      "kalamboli_kw": 1.1
+    },
+    {
+      "hour": 7,
+      "avg_load_kw": 5.84,
+      "avg_forecast_kw": 5.62,
+      "avg_cost_inr": 10.27,
+      "bhatan_kw": 2.04,
+      "palaspe_kw": 1.46,
+      "somathne_kw": 1.17,
+      "kalamboli_kw": 1.17
+    },
+    {
+      "hour": 8,
+      "avg_load_kw": 6.42,
+      "avg_forecast_kw": 6.36,
+      "avg_cost_inr": 12.48,
+      "bhatan_kw": 2.25,
+      "palaspe_kw": 1.6,
+      "somathne_kw": 1.28,
+      "kalamboli_kw": 1.28
+    },
+    {
+      "hour": 9,
+      "avg_load_kw": 6.16,
+      "avg_forecast_kw": 6.2,
+      "avg_cost_inr": 11.82,
+      "bhatan_kw": 2.16,
+      "palaspe_kw": 1.54,
+      "somathne_kw": 1.23,
+      "kalamboli_kw": 1.23
+    },
+    {
+      "hour": 10,
+      "avg_load_kw": 6.03,
+      "avg_forecast_kw": 6.15,
+      "avg_cost_inr": 10.87,
+      "bhatan_kw": 2.11,
+      "palaspe_kw": 1.51,
+      "somathne_kw": 1.21,
+      "kalamboli_kw": 1.21
+    },
+    {
+      "hour": 11,
+      "avg_load_kw": 6.35,
+      "avg_forecast_kw": 6.39,
+      "avg_cost_inr": 12.12,
+      "bhatan_kw": 2.22,
+      "palaspe_kw": 1.59,
+      "somathne_kw": 1.27,
+      "kalamboli_kw": 1.27
+    },
+    {
+      "hour": 12,
+      "avg_load_kw": 6.25,
+      "avg_forecast_kw": 6.33,
+      "avg_cost_inr": 12.56,
+      "bhatan_kw": 2.19,
+      "palaspe_kw": 1.56,
+      "somathne_kw": 1.25,
+      "kalamboli_kw": 1.25
+    },
+    {
+      "hour": 13,
+      "avg_load_kw": 6.69,
+      "avg_forecast_kw": 6.72,
+      "avg_cost_inr": 11.4,
+      "bhatan_kw": 2.34,
+      "palaspe_kw": 1.67,
+      "somathne_kw": 1.34,
+      "kalamboli_kw": 1.34
+    },
+    {
+      "hour": 14,
+      "avg_load_kw": 5.47,
+      "avg_forecast_kw": 5.51,
+      "avg_cost_inr": 11.92,
+      "bhatan_kw": 1.91,
+      "palaspe_kw": 1.37,
+      "somathne_kw": 1.09,
+      "kalamboli_kw": 1.09
+    },
+    {
+      "hour": 15,
+      "avg_load_kw": 6.11,
+      "avg_forecast_kw": 6.05,
+      "avg_cost_inr": 11.35,
+      "bhatan_kw": 2.14,
+      "palaspe_kw": 1.53,
+      "somathne_kw": 1.22,
+      "kalamboli_kw": 1.22
+    },
+    {
+      "hour": 16,
+      "avg_load_kw": 5.99,
+      "avg_forecast_kw": 6.01,
+      "avg_cost_inr": 11.11,
+      "bhatan_kw": 2.1,
+      "palaspe_kw": 1.5,
+      "somathne_kw": 1.2,
+      "kalamboli_kw": 1.2
+    },
+    {
+      "hour": 17,
+      "avg_load_kw": 6.64,
+      "avg_forecast_kw": 6.74,
+      "avg_cost_inr": 11.53,
+      "bhatan_kw": 2.32,
+      "palaspe_kw": 1.66,
+      "somathne_kw": 1.33,
+      "kalamboli_kw": 1.33
+    },
+    {
+      "hour": 18,
+      "avg_load_kw": 6.22,
+      "avg_forecast_kw": 6.08,
+      "avg_cost_inr": 12.86,
+      "bhatan_kw": 2.18,
+      "palaspe_kw": 1.56,
+      "somathne_kw": 1.24,
+      "kalamboli_kw": 1.24
+    },
+    {
+      "hour": 19,
+      "avg_load_kw": 6.04,
+      "avg_forecast_kw": 6.04,
+      "avg_cost_inr": 10.33,
+      "bhatan_kw": 2.11,
+      "palaspe_kw": 1.51,
+      "somathne_kw": 1.21,
+      "kalamboli_kw": 1.21
+    },
+    {
+      "hour": 20,
+      "avg_load_kw": 6.1,
+      "avg_forecast_kw": 6.12,
+      "avg_cost_inr": 12.26,
+      "bhatan_kw": 2.13,
+      "palaspe_kw": 1.52,
+      "somathne_kw": 1.22,
+      "kalamboli_kw": 1.22
+    },
+    {
+      "hour": 21,
+      "avg_load_kw": 5.74,
+      "avg_forecast_kw": 5.66,
+      "avg_cost_inr": 12.05,
+      "bhatan_kw": 2.01,
+      "palaspe_kw": 1.44,
+      "somathne_kw": 1.15,
+      "kalamboli_kw": 1.15
+    },
+    {
+      "hour": 22,
+      "avg_load_kw": 5.94,
+      "avg_forecast_kw": 5.77,
+      "avg_cost_inr": 11.82,
+      "bhatan_kw": 2.08,
+      "palaspe_kw": 1.48,
+      "somathne_kw": 1.19,
+      "kalamboli_kw": 1.19
+    },
+    {
+      "hour": 23,
+      "avg_load_kw": 6.72,
+      "avg_forecast_kw": 6.6,
+      "avg_cost_inr": 10.31,
+      "bhatan_kw": 2.35,
+      "palaspe_kw": 1.68,
+      "somathne_kw": 1.34,
+      "kalamboli_kw": 1.34
+    }
+  ],
+  "grid_stability_hourly": [
+    {
+      "hour": 0,
+      "avg_stability": 86.404,
+      "avg_voltage": 230.045,
+      "avg_power_factor": 0.899,
+      "avg_voltage_fluctuation": 2.526,
+      "overload_rate": 0.103,
+      "fault_rate": 0.028,
+      "avg_solar_kw": 24.703,
+      "avg_predicted_load": 6.296,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 1,
+      "avg_stability": 86.615,
+      "avg_voltage": 230.17,
+      "avg_power_factor": 0.901,
+      "avg_voltage_fluctuation": 2.478,
+      "overload_rate": 0.104,
+      "fault_rate": 0.03,
+      "avg_solar_kw": 25.389,
+      "avg_predicted_load": 6.313,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 2,
+      "avg_stability": 86.448,
+      "avg_voltage": 230.049,
+      "avg_power_factor": 0.903,
+      "avg_voltage_fluctuation": 2.502,
+      "overload_rate": 0.104,
+      "fault_rate": 0.039,
+      "avg_solar_kw": 25.028,
+      "avg_predicted_load": 6.21,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 3,
+      "avg_stability": 86.61,
+      "avg_voltage": 230.122,
+      "avg_power_factor": 0.9,
+      "avg_voltage_fluctuation": 2.482,
+      "overload_rate": 0.1,
+      "fault_rate": 0.029,
+      "avg_solar_kw": 25.108,
+      "avg_predicted_load": 6.256,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 4,
+      "avg_stability": 86.68,
+      "avg_voltage": 230.04,
+      "avg_power_factor": 0.901,
+      "avg_voltage_fluctuation": 2.46,
+      "overload_rate": 0.101,
+      "fault_rate": 0.031,
+      "avg_solar_kw": 25.216,
+      "avg_predicted_load": 6.301,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 5,
+      "avg_stability": 86.49,
+      "avg_voltage": 229.959,
+      "avg_power_factor": 0.9,
+      "avg_voltage_fluctuation": 2.475,
+      "overload_rate": 0.107,
+      "fault_rate": 0.033,
+      "avg_solar_kw": 24.455,
+      "avg_predicted_load": 6.244,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 6,
+      "avg_stability": 86.734,
+      "avg_voltage": 230.075,
+      "avg_power_factor": 0.9,
+      "avg_voltage_fluctuation": 2.489,
+      "overload_rate": 0.094,
+      "fault_rate": 0.025,
+      "avg_solar_kw": 25.391,
+      "avg_predicted_load": 6.25,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 7,
+      "avg_stability": 86.872,
+      "avg_voltage": 229.951,
+      "avg_power_factor": 0.901,
+      "avg_voltage_fluctuation": 2.488,
+      "overload_rate": 0.091,
+      "fault_rate": 0.024,
+      "avg_solar_kw": 25.806,
+      "avg_predicted_load": 6.337,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 8,
+      "avg_stability": 86.302,
+      "avg_voltage": 229.737,
+      "avg_power_factor": 0.899,
+      "avg_voltage_fluctuation": 2.524,
+      "overload_rate": 0.105,
+      "fault_rate": 0.036,
+      "avg_solar_kw": 25.267,
+      "avg_predicted_load": 6.319,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 9,
+      "avg_stability": 86.631,
+      "avg_voltage": 230.094,
+      "avg_power_factor": 0.9,
+      "avg_voltage_fluctuation": 2.487,
+      "overload_rate": 0.092,
+      "fault_rate": 0.034,
+      "avg_solar_kw": 25.264,
+      "avg_predicted_load": 6.281,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 10,
+      "avg_stability": 86.396,
+      "avg_voltage": 230.227,
+      "avg_power_factor": 0.899,
+      "avg_voltage_fluctuation": 2.529,
+      "overload_rate": 0.106,
+      "fault_rate": 0.024,
+      "avg_solar_kw": 24.908,
+      "avg_predicted_load": 6.37,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 11,
+      "avg_stability": 86.616,
+      "avg_voltage": 230.179,
+      "avg_power_factor": 0.899,
+      "avg_voltage_fluctuation": 2.517,
+      "overload_rate": 0.091,
+      "fault_rate": 0.029,
+      "avg_solar_kw": 24.711,
+      "avg_predicted_load": 6.399,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 12,
+      "avg_stability": 86.403,
+      "avg_voltage": 229.935,
+      "avg_power_factor": 0.898,
+      "avg_voltage_fluctuation": 2.521,
+      "overload_rate": 0.102,
+      "fault_rate": 0.028,
+      "avg_solar_kw": 24.716,
+      "avg_predicted_load": 6.285,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 13,
+      "avg_stability": 86.61,
+      "avg_voltage": 230.115,
+      "avg_power_factor": 0.899,
+      "avg_voltage_fluctuation": 2.489,
+      "overload_rate": 0.1,
+      "fault_rate": 0.025,
+      "avg_solar_kw": 25.377,
+      "avg_predicted_load": 6.377,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 14,
+      "avg_stability": 86.387,
+      "avg_voltage": 230.015,
+      "avg_power_factor": 0.9,
+      "avg_voltage_fluctuation": 2.524,
+      "overload_rate": 0.103,
+      "fault_rate": 0.033,
+      "avg_solar_kw": 25.098,
+      "avg_predicted_load": 6.486,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 15,
+      "avg_stability": 86.645,
+      "avg_voltage": 229.926,
+      "avg_power_factor": 0.901,
+      "avg_voltage_fluctuation": 2.482,
+      "overload_rate": 0.1,
+      "fault_rate": 0.03,
+      "avg_solar_kw": 24.352,
+      "avg_predicted_load": 6.266,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 16,
+      "avg_stability": 86.518,
+      "avg_voltage": 229.854,
+      "avg_power_factor": 0.9,
+      "avg_voltage_fluctuation": 2.539,
+      "overload_rate": 0.096,
+      "fault_rate": 0.028,
+      "avg_solar_kw": 25.422,
+      "avg_predicted_load": 6.304,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 17,
+      "avg_stability": 86.382,
+      "avg_voltage": 230.053,
+      "avg_power_factor": 0.899,
+      "avg_voltage_fluctuation": 2.51,
+      "overload_rate": 0.107,
+      "fault_rate": 0.028,
+      "avg_solar_kw": 24.941,
+      "avg_predicted_load": 6.304,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 18,
+      "avg_stability": 86.72,
+      "avg_voltage": 229.862,
+      "avg_power_factor": 0.899,
+      "avg_voltage_fluctuation": 2.444,
+      "overload_rate": 0.107,
+      "fault_rate": 0.022,
+      "avg_solar_kw": 25.386,
+      "avg_predicted_load": 6.391,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 19,
+      "avg_stability": 86.955,
+      "avg_voltage": 229.978,
+      "avg_power_factor": 0.901,
+      "avg_voltage_fluctuation": 2.457,
+      "overload_rate": 0.087,
+      "fault_rate": 0.027,
+      "avg_solar_kw": 24.978,
+      "avg_predicted_load": 6.324,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 20,
+      "avg_stability": 86.78,
+      "avg_voltage": 229.886,
+      "avg_power_factor": 0.902,
+      "avg_voltage_fluctuation": 2.448,
+      "overload_rate": 0.105,
+      "fault_rate": 0.025,
+      "avg_solar_kw": 25.299,
+      "avg_predicted_load": 6.278,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 21,
+      "avg_stability": 86.48,
+      "avg_voltage": 229.957,
+      "avg_power_factor": 0.9,
+      "avg_voltage_fluctuation": 2.565,
+      "overload_rate": 0.09,
+      "fault_rate": 0.03,
+      "avg_solar_kw": 25.328,
+      "avg_predicted_load": 6.24,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 22,
+      "avg_stability": 86.64,
+      "avg_voltage": 229.866,
+      "avg_power_factor": 0.9,
+      "avg_voltage_fluctuation": 2.517,
+      "overload_rate": 0.089,
+      "fault_rate": 0.03,
+      "avg_solar_kw": 24.749,
+      "avg_predicted_load": 6.398,
+      "stability_label": "STABLE"
+    },
+    {
+      "hour": 23,
+      "avg_stability": 86.62,
+      "avg_voltage": 229.852,
+      "avg_power_factor": 0.9,
+      "avg_voltage_fluctuation": 2.5,
+      "overload_rate": 0.095,
+      "fault_rate": 0.03,
+      "avg_solar_kw": 24.916,
+      "avg_predicted_load": 6.467,
+      "stability_label": "STABLE"
+    }
+  ],
+  "alert_events": [
+    {
+      "hour": 15,
+      "voltage": 235.1022803671,
+      "stability_score": 74.8,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 4.5kW. AI initiating load shedding."
+    },
+    {
+      "hour": 10,
+      "voltage": 231.1454696803,
+      "stability_score": 74.7,
+      "overload": 0,
+      "fault": 1,
+      "alert_type": "CRITICAL",
+      "alert_message": "Transformer fault detected. Voltage: 231.1V. Switching to battery backup."
+    },
+    {
+      "hour": 3,
+      "voltage": 236.8878866792,
+      "stability_score": 74.3,
+      "overload": 0,
+      "fault": 1,
+      "alert_type": "CRITICAL",
+      "alert_message": "Transformer fault detected. Voltage: 236.9V. Switching to battery backup."
+    },
+    {
+      "hour": 11,
+      "voltage": 223.2004932094,
+      "stability_score": 64.7,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 1.7kW. AI initiating load shedding."
+    },
+    {
+      "hour": 6,
+      "voltage": 240.4485748156,
+      "stability_score": 80.4,
+      "overload": 0,
+      "fault": 1,
+      "alert_type": "CRITICAL",
+      "alert_message": "Transformer fault detected. Voltage: 240.4V. Switching to battery backup."
+    },
+    {
+      "hour": 12,
+      "voltage": 237.5263200552,
+      "stability_score": 75.9,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 10.8kW. AI initiating load shedding."
+    },
+    {
+      "hour": 16,
+      "voltage": 230.1115827828,
+      "stability_score": 50.5,
+      "overload": 1,
+      "fault": 1,
+      "alert_type": "CRITICAL",
+      "alert_message": "Transformer fault detected. Voltage: 230.1V. Switching to battery backup."
+    },
+    {
+      "hour": 11,
+      "voltage": 231.2463584642,
+      "stability_score": 77.6,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 5.6kW. AI initiating load shedding."
+    },
+    {
+      "hour": 14,
+      "voltage": 230.7671059775,
+      "stability_score": 77.1,
+      "overload": 0,
+      "fault": 1,
+      "alert_type": "CRITICAL",
+      "alert_message": "Transformer fault detected. Voltage: 230.8V. Switching to battery backup."
+    },
+    {
+      "hour": 0,
+      "voltage": 225.8055366299,
+      "stability_score": 67.7,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 6.6kW. AI initiating load shedding."
+    },
+    {
+      "hour": 11,
+      "voltage": 230.4141628526,
+      "stability_score": 75.0,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 3.6kW. AI initiating load shedding."
+    },
+    {
+      "hour": 11,
+      "voltage": 232.434682787,
+      "stability_score": 73.7,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 1.3kW. AI initiating load shedding."
+    },
+    {
+      "hour": 6,
+      "voltage": 230.7232369224,
+      "stability_score": 73.6,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 6.4kW. AI initiating load shedding."
+    },
+    {
+      "hour": 3,
+      "voltage": 220.956597157,
+      "stability_score": 68.0,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 2.1kW. AI initiating load shedding."
+    },
+    {
+      "hour": 20,
+      "voltage": 237.1600483568,
+      "stability_score": 73.4,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 8.9kW. AI initiating load shedding."
+    },
+    {
+      "hour": 3,
+      "voltage": 233.5035030606,
+      "stability_score": 74.8,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 11.3kW. AI initiating load shedding."
+    },
+    {
+      "hour": 15,
+      "voltage": 242.1067105834,
+      "stability_score": 67.3,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 9.1kW. AI initiating load shedding."
+    },
+    {
+      "hour": 14,
+      "voltage": 228.8963562152,
+      "stability_score": 66.3,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 8.2kW. AI initiating load shedding."
+    },
+    {
+      "hour": 19,
+      "voltage": 237.9457365082,
+      "stability_score": 77.8,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "Overload in grid. Load: 8.1kW. AI initiating load shedding."
+    },
+    {
+      "hour": 11,
+      "voltage": 229.1589161395,
+      "stability_score": 63.7,
+      "overload": 1,
+      "fault": 1,
+      "alert_type": "CRITICAL",
+      "alert_message": "Transformer fault detected. Voltage: 229.2V. Switching to battery backup."
+    }
+  ],
+  "summary_stats": {
+    "peak_solar_kw": 10.0,
+    "avg_solar_kw": 5.01,
+    "avg_battery_pct": 20.8,
+    "avg_load_kw": 6.0,
+    "avg_grid_frequency": 50.002,
+    "avg_stability_score": 86.6,
+    "total_overload_events": 4956,
+    "total_fault_events": 1460,
+    "avg_voltage": 230.0,
+    "avg_power_factor": 0.9
+  }
+}
