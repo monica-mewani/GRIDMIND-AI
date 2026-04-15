@@ -1,0 +1,105 @@
+/* =====================================================
+   Dashboard Layout — 6-panel India Grid
+   ===================================================== */
+
+/* ── Hero strip ── */
+.dash-page {
+  padding: 20px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: calc(100vh - var(--header-h) - 28px);
+  animation: fadeInUp 0.35s ease both;
+}
+
+.dash-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dash-hero-tag {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+  animation: glow-pulse 3s ease infinite;
+}
+
+.dash-hero-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+
+.dash-hero-divider {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* ── Generic grid row ── */
+.dash-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;   /* default: full width (panel 1) */
+}
+
+/* Panel 2/3/4 — three equal columns */
+.dash-mid-row {
+  grid-template-columns: 2fr 1.1fr 1.1fr;
+}
+
+/* Panel 5 (zone) + KPI column */
+.dash-bottom-row {
+  grid-template-columns: 1fr 1.8fr;
+  align-items: start;
+}
+
+/* KPI container stacks 6 cards in 3×2 */
+.kpi-col {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* override KPIStrip inner grid for the side panel */
+.kpi-col > div {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+/* ── Panel card base ── */
+.panel-card {
+  padding: 18px 20px;
+}
+
+/* ── Panel title / subtitle reuse ── */
+.panel-title {
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-title-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 6px var(--primary);
+}
+
+.panel-subtitle {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
