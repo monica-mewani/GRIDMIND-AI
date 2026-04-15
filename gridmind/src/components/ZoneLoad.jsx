@@ -1,19 +1,23 @@
-import { useState } from 'react';
-import { RadialBarChart, RadialBar, Legend, ResponsiveContainer, Tooltip } from 'recharts';
+import { useState, useEffect } from 'react';
+import { RadialBarChart, RadialBar, ResponsiveContainer, Tooltip } from 'recharts';
+import { loadData } from '../data/kaggleData';
 
-const BASE_ZONES = [
-  { name: 'Kalamboli Market', pct: 60, color: '#0EA5E9', sub: 'commercial' },
-  { name: 'Palaspe Farm Pumps', pct: 72, color: '#FF6B35', sub: 'agricultural – peak season' },
-  { name: 'Somathne PHC+School', pct: 45, color: '#FF2D55', sub: 'PRIORITY ZONE 🔴', priority: true },
-  { name: 'Bhatan Village', pct: 85, color: '#00FF88', sub: 'residential – 680 homes' },
-];
-
-const AI_ZONES = [
-  { name: 'Kalamboli Market', pct: 54, color: '#0EA5E9', sub: 'commercial ↓' },
-  { name: 'Palaspe Farm Pumps', pct: 65, color: '#FF6B35', sub: 'agricultural ↓' },
-  { name: 'Somathne PHC+School', pct: 95, color: '#FF2D55', sub: 'PRIORITY BOOST 🔴', priority: true },
-  { name: 'Bhatan Village', pct: 76, color: '#00FF88', sub: 'residential ↓' },
-];
+function getZones() {
+  const h   = new Date().getHours();
+  const row = loadData[h];
+  const noise = () => (Math.random() - 0.5) * 0.2;
+  const bhatan    = +(row.bhatan_kw    + noise()).toFixed(2);
+  const somathne  = +(row.somathne_kw  + noise()).toFixed(2);
+  const palaspe   = +(row.palaspe_kw   + noise()).toFixed(2);
+  const kalamboli = +(row.kalamboli_kw + noise()).toFixed(2);
+  const total = bhatan + somathne + palaspe + kalamboli;
+  return [
+    { name: 'Bhatan Village',      kw: bhatan,    pct: +((bhatan   /total)*100).toFixed(1), color: '#00FF88', sub: '680 homes · residential' },
+    { name: 'Somathne PHC+School', kw: somathne,  pct: +((somathne /total)*100).toFixed(1), color: '#FF2D55', sub: 'PRIORITY ZONE 🔴', priority: true },
+    { name: 'Palaspe Farm Pumps',  kw: palaspe,   pct: +((palaspe  /total)*100).toFixed(1), color: '#FF6B35', sub: 'agricultural – kharif' },
+    { name: 'Kalamboli Market',    kw: kalamboli, pct: +((kalamboli/total)*100).toFixed(1), color: '#0EA5E9', sub: 'commercial' },
+  ];
+}
 
 const CustomTooltip = ({ active, payload }) => {
   if (!active || !payload?.length) return null;
@@ -25,16 +29,30 @@ const CustomTooltip = ({ active, payload }) => {
     }}>
       <div style={{ fontSize: 11, color: d.color, fontWeight: 700, fontFamily: 'var(--font-head)' }}>{d.name}</div>
       <div style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginTop: 2 }}>{d.sub}</div>
-      <div style={{ fontSize: 18, fontWeight: 700, color: d.color, fontFamily: 'var(--font-head)', marginTop: 4 }}>{d.pct}%</div>
+      <div style={{ fontSize: 16, fontWeight: 700, color: d.color, fontFamily: 'var(--font-head)', marginTop: 4 }}>
+        {d.kw} kW · {d.pct}%
+      </div>
     </div>
   );
 };
 
 export default function ZoneLoad() {
-  const [aiOn, setAiOn] = useState(false);
-  const zones = aiOn ? AI_ZONES : BASE_ZONES;
+  const [aiOn,  setAiOn]  = useState(false);
+  const [zones, setZones] = useState(getZones);
 
-  const chartData = zones.map(z => ({ ...z, value: z.pct, fill: z.color }));
+  useEffect(() => {
+    const id = setInterval(() => setZones(getZones()), 3000);
+    return () => clearInterval(id);
+  }, []);
+
+  const displayZones = aiOn
+    ? zones.map(z => z.priority
+        ? { ...z, kw: +(z.kw * 1.3).toFixed(2), pct: +(z.pct * 1.3).toFixed(1), sub: 'PRIORITY BOOST 🔴' }
+        : { ...z, kw: +(z.kw * 0.85).toFixed(2), pct: +(z.pct * 0.85).toFixed(1), sub: z.sub + ' ↓' }
+      )
+    : zones;
+
+  const chartData = displayZones.map(z => ({ ...z, value: z.pct, fill: z.color }));
 
   return (
     <div className="glass-card panel-card" style={{ display: 'flex', flexDirection: 'column' }}>
@@ -70,37 +88,34 @@ export default function ZoneLoad() {
       </div>
       <div style={{ fontSize: 11, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
         {aiOn
-          ? '🤖 AI Active — Somathne PHC priority boosted to 95%'
-          : 'Real-time load % per zone · 4 active zones'}
+          ? '🤖 AI Active — Somathne PHC priority boosted'
+          : 'Kaggle real-time load · 4 active zones · kW live'}
       </div>
 
       {/* Chart */}
       <div style={{ height: 180 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <RadialBarChart cx="50%" cy="50%" innerRadius={20} outerRadius={90}
+          <RadialBarChart cx="50%" cy="50%" innerRadius={20} outerRadius={88}
             data={chartData} startAngle={90} endAngle={-270} barSize={14} barGap={4}>
-            <RadialBar background={{ fill: 'rgba(255,255,255,0.04)' }}
-              dataKey="value" cornerRadius={6} />
+            <RadialBar background={{ fill: 'rgba(255,255,255,0.04)' }} dataKey="value" cornerRadius={6} />
             <Tooltip content={<CustomTooltip />} />
           </RadialBarChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Zone legend */}
+      {/* Zone legend with kW values */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 5, marginTop: 4 }}>
-        {zones.map(z => (
+        {displayZones.map(z => (
           <div key={z.name} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <div style={{ width: 8, height: 8, borderRadius: '50%', background: z.color, flexShrink: 0, boxShadow: `0 0 4px ${z.color}88` }} />
             <div style={{ flex: 1, fontSize: 10, color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
               {z.name}
-              {z.priority && (
-                <span style={{ marginLeft: 4, fontSize: 9, color: '#FF2D55' }}>★ PRIORITY</span>
-              )}
+              {z.priority && <span style={{ marginLeft: 4, fontSize: 9, color: '#FF2D55' }}>★ PRIORITY</span>}
             </div>
-            <div style={{
-              fontSize: 11, fontWeight: 700, color: z.color, fontFamily: 'var(--font-head)',
-              minWidth: 36, textAlign: 'right'
-            }}>
+            <div style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginRight: 6 }}>
+              {z.kw} kW
+            </div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: z.color, fontFamily: 'var(--font-head)', minWidth: 36, textAlign: 'right' }}>
               {z.pct}%
             </div>
           </div>

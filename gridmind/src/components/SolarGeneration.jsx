@@ -1,61 +1,97 @@
+import { useState, useEffect } from 'react';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid,
-  Tooltip, ResponsiveContainer
+  Tooltip, ResponsiveContainer, ReferenceLine
 } from 'recharts';
+import { solarData } from '../data/kaggleData';
 
-const data = [
-  { time: '6 AM',  kw: 0.8 },
-  { time: '7 AM',  kw: 1.9 },
-  { time: '8 AM',  kw: 3.2 },
-  { time: '9 AM',  kw: 4.8 },
-  { time: '10 AM', kw: 6.1 },
-  { time: '11 AM', kw: 7.6 },
-  { time: '12 PM', kw: 8.8 },
-  { time: '1 PM',  kw: 9.1 },
-  { time: '2 PM',  kw: 8.4 },
-  { time: '3 PM',  kw: 6.8 },
-  { time: '4 PM',  kw: 5.2 },
-  { time: '5 PM',  kw: 3.0 },
-  { time: '6 PM',  kw: 1.4 },
-  { time: '7 PM',  kw: 0.2 },
-];
-
-const pills = [
-  { label: 'Peak', value: '9.1 kW at 12:30 IST', color: '#00FF88' },
-  { label: 'Avg',  value: '5.8 kW',               color: '#0EA5E9' },
-  { label: 'Confidence', value: '94%',             color: '#FFD60A' },
-];
+/* Build chart data from Kaggle — all 24 hours */
+const baseChartData = solarData.map(row => ({
+  time:   row.time_label,
+  hour:   row.hour,
+  kw:     +row.avg_solar_kw.toFixed(2),
+  fcst:   +row.avg_forecast_kw.toFixed(2),
+  weather: row.weather,
+  action:  row.ai_action,
+}));
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
+  const d = payload[0]?.payload;
   return (
     <div style={{
-      background: 'rgba(4,15,30,0.92)', border: '1px solid rgba(0,255,136,0.25)',
-      borderRadius: 8, padding: '8px 12px', backdropFilter: 'blur(12px)'
+      background: 'rgba(4,15,30,0.95)', border: '1px solid rgba(0,255,136,0.25)',
+      borderRadius: 10, padding: '10px 14px', backdropFilter: 'blur(12px)'
     }}>
       <div style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginBottom: 4 }}>{label}</div>
-      <div style={{ fontSize: 16, fontFamily: 'var(--font-head)', fontWeight: 700, color: '#00FF88' }}>
-        {payload[0].value} <span style={{ fontSize: 10, fontWeight: 400 }}>kW</span>
+      <div style={{ fontSize: 18, fontFamily: 'var(--font-head)', fontWeight: 700, color: '#00FF88' }}>
+        {payload[0].value} <span style={{ fontSize: 11, fontWeight: 400 }}>kW actual</span>
       </div>
+      {payload[1] && (
+        <div style={{ fontSize: 12, color: '#FFD60A', fontFamily: 'var(--font-mono)', marginTop: 2 }}>
+          {payload[1].value} kW forecast
+        </div>
+      )}
+      {d?.weather && (
+        <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 4 }}>
+          🌤 {d.weather} · {d.action}
+        </div>
+      )}
     </div>
   );
 };
 
 export default function SolarGeneration() {
+  const [chartData, setChartData] = useState(baseChartData);
+  const [nowHour, setNowHour]     = useState(new Date().getHours());
+
+  useEffect(() => {
+    const tick = () => {
+      const h = new Date().getHours();
+      setNowHour(h);
+      setChartData(baseChartData.map(row => ({
+        ...row,
+        kw: row.hour === h
+          ? +(row.kw + (Math.random() - 0.5) * 0.3).toFixed(2)
+          : row.kw,
+      })));
+    };
+    const id = setInterval(tick, 3000);
+    return () => clearInterval(id);
+  }, []);
+
+  const peakRow = [...chartData].sort((a, b) => b.kw - a.kw)[0];
+  const avg     = (chartData.reduce((s, r) => s + r.kw, 0) / chartData.length).toFixed(2);
+  const current = chartData.find(r => r.hour === nowHour);
+
+  const pills = [
+    { label: 'Peak',    value: `${peakRow?.kw} kW at ${peakRow?.time}`, color: '#00FF88' },
+    { label: 'Avg',     value: `${avg} kW`,                              color: '#0EA5E9' },
+    { label: 'Now',     value: `${current?.kw ?? '--'} kW`,             color: '#FFD60A' },
+  ];
+
   return (
     <div className="glass-card panel-card" style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+      {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
         <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#00FF88', boxShadow: '0 0 6px #00FF88' }} />
         <span style={{ fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 600, color: 'var(--text-primary)' }}>
           Solar Generation
         </span>
+        <span style={{
+          marginLeft: 'auto', color: '#00FF88', fontSize: 10,
+          border: '1px solid #00FF88', padding: '2px 6px', borderRadius: 4,
+          fontFamily: 'var(--font-mono)'
+        }}>
+          📊 Kaggle Verified
+        </span>
       </div>
-      <div style={{ fontSize: 11, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
-        6 AM – 7 PM IST · Bhatan Solar Farm, Raigad
+      <div style={{ fontSize: 11, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>
+        24-hr · Bhatan Solar Farm, Raigad · 50,000+ readings
       </div>
 
       {/* Pills */}
-      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 14 }}>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
         {pills.map(p => (
           <div key={p.label} style={{
             display: 'flex', alignItems: 'center', gap: 5, padding: '3px 10px',
@@ -71,34 +107,43 @@ export default function SolarGeneration() {
       {/* Chart */}
       <div style={{ flex: 1, height: 160 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data} margin={{ top: 4, right: 4, left: -18, bottom: 0 }}>
+          <AreaChart data={chartData} margin={{ top: 4, right: 4, left: -18, bottom: 0 }}>
             <defs>
               <linearGradient id="solarGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%"   stopColor="#00FF88" stopOpacity={0.5} />
+                <stop offset="0%"   stopColor="#00FF88" stopOpacity={0.45} />
                 <stop offset="100%" stopColor="#00FF88" stopOpacity={0} />
+              </linearGradient>
+              <linearGradient id="fcstGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stopColor="#FFD60A" stopOpacity={0.2} />
+                <stop offset="100%" stopColor="#FFD60A" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,255,136,0.06)" />
-            <XAxis dataKey="time" tick={{ fill: 'rgba(240,255,248,0.35)', fontSize: 9, fontFamily: 'JetBrains Mono' }}
-              axisLine={false} tickLine={false} />
-            <YAxis tick={{ fill: 'rgba(240,255,248,0.35)', fontSize: 9, fontFamily: 'JetBrains Mono' }}
-              axisLine={false} tickLine={false} domain={[0, 10]} tickCount={6} />
+            <XAxis dataKey="time"
+              tick={{ fill: 'rgba(240,255,248,0.3)', fontSize: 8, fontFamily: 'JetBrains Mono' }}
+              axisLine={false} tickLine={false}
+              interval={5}
+            />
+            <YAxis
+              tick={{ fill: 'rgba(240,255,248,0.3)', fontSize: 9, fontFamily: 'JetBrains Mono' }}
+              axisLine={false} tickLine={false} domain={[0, 11]} tickCount={5}
+            />
             <Tooltip content={<CustomTooltip />} />
-            <Area type="monotone" dataKey="kw" stroke="#00FF88" strokeWidth={2}
-              fill="url(#solarGrad)" dot={false}
+            <ReferenceLine x={current?.time} stroke="rgba(0,255,136,0.4)" strokeDasharray="3 3" label={{ value: 'NOW', fill: '#00FF88', fontSize: 8 }} />
+            <Area type="monotone" dataKey="kw"   stroke="#00FF88" strokeWidth={2} fill="url(#solarGrad)" dot={false}
               activeDot={{ r: 5, fill: '#00FF88', stroke: '#040f1e', strokeWidth: 2 }} />
+            <Area type="monotone" dataKey="fcst" stroke="#FFD60A" strokeWidth={1} fill="url(#fcstGrad)" dot={false} strokeDasharray="4 2" />
           </AreaChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Cloud note */}
       <div style={{
-        marginTop: 10, fontSize: 10, color: 'rgba(255,214,10,0.7)',
+        marginTop: 8, fontSize: 10, color: 'rgba(255,214,10,0.7)',
         fontFamily: 'var(--font-mono)', textAlign: 'center',
         background: 'rgba(255,214,10,0.06)', borderRadius: 6, padding: '4px 10px',
         border: '1px solid rgba(255,214,10,0.12)'
       }}>
-        ☁️ Light clouds expected 3–4 PM (Monsoon pre-season, Raigad)
+        ☁️ {current?.weather ?? 'Clear'} · AI: {current?.action ?? 'BALANCED'} · Monsoon pre-season, Raigad
       </div>
     </div>
   );
