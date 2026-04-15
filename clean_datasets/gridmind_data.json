@@ -11,8 +11,136 @@
     "total_residents": 2400,
     "system_capacity_kw": 10,
     "battery_capacity_kwh": 20,
-    "data_source": "Kaggle - Renewable Energy & Smart Grid Datasets",
-    "generated_at": "2026-04-15T13:56:48.019770"
+    "data_source": "Kaggle \u2014 Renewable Energy & Smart Grid Datasets",
+    "ml_powered": true,
+    "models_used": [
+      "GradientBoosting Solar Action Classifier",
+      "GradientBoosting Grid Stability Classifier",
+      "RandomForest Overload Detector",
+      "RandomForest Fault Detector",
+      "GradientBoosting Load Forecaster"
+    ],
+    "generated_at": "2026-04-16T00:59:58.583884"
+  },
+  "model_accuracy": {
+    "solar_action": {
+      "algorithm": "GradientBoostingClassifier",
+      "features": [
+        "Solar_Irradiance",
+        "Temperature",
+        "Humidity",
+        "Rainfall",
+        "Wind_Speed",
+        "Battery_Level",
+        "Solar_kW",
+        "hour",
+        "month"
+      ],
+      "classes": [
+        "BALANCED",
+        "REDUCE LOAD",
+        "STORE EXCESS"
+      ],
+      "test_accuracy": 100.0,
+      "cv_accuracy": 100.0
+    },
+    "grid_stability": {
+      "algorithm": "GradientBoostingClassifier",
+      "features": [
+        "Voltage (V)",
+        "Current (A)",
+        "Power Consumption (kW)",
+        "Reactive Power (kVAR)",
+        "Power Factor",
+        "Solar Power (kW)",
+        "Wind Power (kW)",
+        "Grid Supply (kW)",
+        "Voltage Fluctuation (%)",
+        "Temperature (\u00b0C)",
+        "Humidity (%)",
+        "Electricity Price (USD/kWh)",
+        "Predicted Load (kW)",
+        "Voltage_Dev",
+        "hour",
+        "month"
+      ],
+      "classes": [
+        "STABLE",
+        "WARNING"
+      ],
+      "test_accuracy": 95.9667,
+      "cv_accuracy": 96.0467
+    },
+    "overload_detector": {
+      "algorithm": "GradientBoostingClassifier (oversampled)",
+      "features": [
+        "Voltage (V)",
+        "Current (A)",
+        "Power Consumption (kW)",
+        "Reactive Power (kVAR)",
+        "Power Factor",
+        "Solar Power (kW)",
+        "Wind Power (kW)",
+        "Grid Supply (kW)",
+        "Voltage Fluctuation (%)",
+        "Temperature (\u00b0C)",
+        "Humidity (%)",
+        "Electricity Price (USD/kWh)",
+        "Predicted Load (kW)",
+        "Voltage_Dev",
+        "hour",
+        "month"
+      ],
+      "test_accuracy": 77.1229,
+      "note": "Trained on oversampled balanced dataset"
+    },
+    "fault_detector": {
+      "algorithm": "GradientBoostingClassifier (oversampled)",
+      "features": [
+        "Voltage (V)",
+        "Current (A)",
+        "Power Consumption (kW)",
+        "Reactive Power (kVAR)",
+        "Power Factor",
+        "Solar Power (kW)",
+        "Wind Power (kW)",
+        "Grid Supply (kW)",
+        "Voltage Fluctuation (%)",
+        "Temperature (\u00b0C)",
+        "Humidity (%)",
+        "Electricity Price (USD/kWh)",
+        "Predicted Load (kW)",
+        "Voltage_Dev",
+        "hour",
+        "month"
+      ],
+      "test_accuracy": 90.755,
+      "note": "Trained on oversampled balanced dataset"
+    },
+    "load_forecaster": {
+      "algorithm": "GradientBoostingRegressor",
+      "features": [
+        "Solar_Irradiance",
+        "Temperature",
+        "Wind_Speed",
+        "Humidity",
+        "Rainfall",
+        "Solar_Power_Generated",
+        "Wind_Power_Generated",
+        "Hydro_Power_Generated",
+        "Battery_Level",
+        "Battery_Input_Output",
+        "Aux_Backup_Power",
+        "Grid_Frequency",
+        "Energy_Cost",
+        "hour",
+        "month",
+        "dayofweek"
+      ],
+      "r2_score": 0.21902,
+      "mae": 80.6873,
+      "cv_r2": 0.27094
+    }
   },
   "solar_hourly": [
     {
@@ -454,8 +582,8 @@
     {
       "hour": 0,
       "avg_load_kw": 5.92,
-      "avg_forecast_kw": 6.02,
       "avg_cost_inr": 11.01,
+      "avg_forecast_kw": 5.84,
       "bhatan_kw": 2.07,
       "palaspe_kw": 1.48,
       "somathne_kw": 1.18,
@@ -464,8 +592,8 @@
     {
       "hour": 1,
       "avg_load_kw": 5.95,
-      "avg_forecast_kw": 5.81,
       "avg_cost_inr": 11.45,
+      "avg_forecast_kw": 5.78,
       "bhatan_kw": 2.08,
       "palaspe_kw": 1.49,
       "somathne_kw": 1.19,
@@ -474,8 +602,8 @@
     {
       "hour": 2,
       "avg_load_kw": 5.97,
-      "avg_forecast_kw": 6.09,
       "avg_cost_inr": 12.68,
+      "avg_forecast_kw": 5.74,
       "bhatan_kw": 2.09,
       "palaspe_kw": 1.49,
       "somathne_kw": 1.19,
@@ -484,8 +612,8 @@
     {
       "hour": 3,
       "avg_load_kw": 4.68,
-      "avg_forecast_kw": 4.62,
       "avg_cost_inr": 10.64,
+      "avg_forecast_kw": 4.93,
       "bhatan_kw": 1.64,
       "palaspe_kw": 1.17,
       "somathne_kw": 0.94,
@@ -494,8 +622,8 @@
     {
       "hour": 4,
       "avg_load_kw": 5.6,
-      "avg_forecast_kw": 5.65,
       "avg_cost_inr": 12.14,
+      "avg_forecast_kw": 5.61,
       "bhatan_kw": 1.96,
       "palaspe_kw": 1.4,
       "somathne_kw": 1.12,
@@ -504,8 +632,8 @@
     {
       "hour": 5,
       "avg_load_kw": 5.62,
-      "avg_forecast_kw": 5.52,
       "avg_cost_inr": 10.89,
+      "avg_forecast_kw": 5.64,
       "bhatan_kw": 1.97,
       "palaspe_kw": 1.4,
       "somathne_kw": 1.12,
@@ -514,8 +642,8 @@
     {
       "hour": 6,
       "avg_load_kw": 5.51,
-      "avg_forecast_kw": 5.56,
       "avg_cost_inr": 12.32,
+      "avg_forecast_kw": 5.47,
       "bhatan_kw": 1.93,
       "palaspe_kw": 1.38,
       "somathne_kw": 1.1,
@@ -524,8 +652,8 @@
     {
       "hour": 7,
       "avg_load_kw": 5.84,
-      "avg_forecast_kw": 5.62,
       "avg_cost_inr": 10.27,
+      "avg_forecast_kw": 5.84,
       "bhatan_kw": 2.04,
       "palaspe_kw": 1.46,
       "somathne_kw": 1.17,
@@ -534,8 +662,8 @@
     {
       "hour": 8,
       "avg_load_kw": 6.42,
-      "avg_forecast_kw": 6.36,
       "avg_cost_inr": 12.48,
+      "avg_forecast_kw": 6.34,
       "bhatan_kw": 2.25,
       "palaspe_kw": 1.6,
       "somathne_kw": 1.28,
@@ -544,8 +672,8 @@
     {
       "hour": 9,
       "avg_load_kw": 6.16,
-      "avg_forecast_kw": 6.2,
       "avg_cost_inr": 11.82,
+      "avg_forecast_kw": 6.39,
       "bhatan_kw": 2.16,
       "palaspe_kw": 1.54,
       "somathne_kw": 1.23,
@@ -554,8 +682,8 @@
     {
       "hour": 10,
       "avg_load_kw": 6.03,
-      "avg_forecast_kw": 6.15,
       "avg_cost_inr": 10.87,
+      "avg_forecast_kw": 6.03,
       "bhatan_kw": 2.11,
       "palaspe_kw": 1.51,
       "somathne_kw": 1.21,
@@ -564,8 +692,8 @@
     {
       "hour": 11,
       "avg_load_kw": 6.35,
-      "avg_forecast_kw": 6.39,
       "avg_cost_inr": 12.12,
+      "avg_forecast_kw": 6.08,
       "bhatan_kw": 2.22,
       "palaspe_kw": 1.59,
       "somathne_kw": 1.27,
@@ -574,8 +702,8 @@
     {
       "hour": 12,
       "avg_load_kw": 6.25,
-      "avg_forecast_kw": 6.33,
       "avg_cost_inr": 12.56,
+      "avg_forecast_kw": 6.43,
       "bhatan_kw": 2.19,
       "palaspe_kw": 1.56,
       "somathne_kw": 1.25,
@@ -584,8 +712,8 @@
     {
       "hour": 13,
       "avg_load_kw": 6.69,
-      "avg_forecast_kw": 6.72,
       "avg_cost_inr": 11.4,
+      "avg_forecast_kw": 6.69,
       "bhatan_kw": 2.34,
       "palaspe_kw": 1.67,
       "somathne_kw": 1.34,
@@ -594,8 +722,8 @@
     {
       "hour": 14,
       "avg_load_kw": 5.47,
-      "avg_forecast_kw": 5.51,
       "avg_cost_inr": 11.92,
+      "avg_forecast_kw": 5.7,
       "bhatan_kw": 1.91,
       "palaspe_kw": 1.37,
       "somathne_kw": 1.09,
@@ -604,8 +732,8 @@
     {
       "hour": 15,
       "avg_load_kw": 6.11,
-      "avg_forecast_kw": 6.05,
       "avg_cost_inr": 11.35,
+      "avg_forecast_kw": 6.35,
       "bhatan_kw": 2.14,
       "palaspe_kw": 1.53,
       "somathne_kw": 1.22,
@@ -614,8 +742,8 @@
     {
       "hour": 16,
       "avg_load_kw": 5.99,
-      "avg_forecast_kw": 6.01,
       "avg_cost_inr": 11.11,
+      "avg_forecast_kw": 6.16,
       "bhatan_kw": 2.1,
       "palaspe_kw": 1.5,
       "somathne_kw": 1.2,
@@ -624,8 +752,8 @@
     {
       "hour": 17,
       "avg_load_kw": 6.64,
-      "avg_forecast_kw": 6.74,
       "avg_cost_inr": 11.53,
+      "avg_forecast_kw": 6.57,
       "bhatan_kw": 2.32,
       "palaspe_kw": 1.66,
       "somathne_kw": 1.33,
@@ -634,8 +762,8 @@
     {
       "hour": 18,
       "avg_load_kw": 6.22,
-      "avg_forecast_kw": 6.08,
       "avg_cost_inr": 12.86,
+      "avg_forecast_kw": 6.27,
       "bhatan_kw": 2.18,
       "palaspe_kw": 1.56,
       "somathne_kw": 1.24,
@@ -644,8 +772,8 @@
     {
       "hour": 19,
       "avg_load_kw": 6.04,
-      "avg_forecast_kw": 6.04,
       "avg_cost_inr": 10.33,
+      "avg_forecast_kw": 6.19,
       "bhatan_kw": 2.11,
       "palaspe_kw": 1.51,
       "somathne_kw": 1.21,
@@ -654,8 +782,8 @@
     {
       "hour": 20,
       "avg_load_kw": 6.1,
-      "avg_forecast_kw": 6.12,
       "avg_cost_inr": 12.26,
+      "avg_forecast_kw": 6.23,
       "bhatan_kw": 2.13,
       "palaspe_kw": 1.52,
       "somathne_kw": 1.22,
@@ -664,8 +792,8 @@
     {
       "hour": 21,
       "avg_load_kw": 5.74,
-      "avg_forecast_kw": 5.66,
       "avg_cost_inr": 12.05,
+      "avg_forecast_kw": 5.35,
       "bhatan_kw": 2.01,
       "palaspe_kw": 1.44,
       "somathne_kw": 1.15,
@@ -674,8 +802,8 @@
     {
       "hour": 22,
       "avg_load_kw": 5.94,
-      "avg_forecast_kw": 5.77,
       "avg_cost_inr": 11.82,
+      "avg_forecast_kw": 6.02,
       "bhatan_kw": 2.08,
       "palaspe_kw": 1.48,
       "somathne_kw": 1.19,
@@ -684,8 +812,8 @@
     {
       "hour": 23,
       "avg_load_kw": 6.72,
-      "avg_forecast_kw": 6.6,
       "avg_cost_inr": 10.31,
+      "avg_forecast_kw": 6.84,
       "bhatan_kw": 2.35,
       "palaspe_kw": 1.68,
       "somathne_kw": 1.34,
@@ -707,7 +835,7 @@
     },
     {
       "hour": 1,
-      "avg_stability": 86.615,
+      "avg_stability": 86.613,
       "avg_voltage": 230.17,
       "avg_power_factor": 0.901,
       "avg_voltage_fluctuation": 2.478,
@@ -755,7 +883,7 @@
     },
     {
       "hour": 5,
-      "avg_stability": 86.49,
+      "avg_stability": 86.491,
       "avg_voltage": 229.959,
       "avg_power_factor": 0.9,
       "avg_voltage_fluctuation": 2.475,
@@ -791,7 +919,7 @@
     },
     {
       "hour": 8,
-      "avg_stability": 86.302,
+      "avg_stability": 86.301,
       "avg_voltage": 229.737,
       "avg_power_factor": 0.899,
       "avg_voltage_fluctuation": 2.524,
@@ -803,7 +931,7 @@
     },
     {
       "hour": 9,
-      "avg_stability": 86.631,
+      "avg_stability": 86.63,
       "avg_voltage": 230.094,
       "avg_power_factor": 0.9,
       "avg_voltage_fluctuation": 2.487,
@@ -827,7 +955,7 @@
     },
     {
       "hour": 11,
-      "avg_stability": 86.616,
+      "avg_stability": 86.617,
       "avg_voltage": 230.179,
       "avg_power_factor": 0.899,
       "avg_voltage_fluctuation": 2.517,
@@ -839,7 +967,7 @@
     },
     {
       "hour": 12,
-      "avg_stability": 86.403,
+      "avg_stability": 86.404,
       "avg_voltage": 229.935,
       "avg_power_factor": 0.898,
       "avg_voltage_fluctuation": 2.521,
@@ -875,7 +1003,7 @@
     },
     {
       "hour": 15,
-      "avg_stability": 86.645,
+      "avg_stability": 86.644,
       "avg_voltage": 229.926,
       "avg_power_factor": 0.901,
       "avg_voltage_fluctuation": 2.482,
@@ -899,7 +1027,7 @@
     },
     {
       "hour": 17,
-      "avg_stability": 86.382,
+      "avg_stability": 86.383,
       "avg_voltage": 230.053,
       "avg_power_factor": 0.899,
       "avg_voltage_fluctuation": 2.51,
@@ -923,7 +1051,7 @@
     },
     {
       "hour": 19,
-      "avg_stability": 86.955,
+      "avg_stability": 86.956,
       "avg_voltage": 229.978,
       "avg_power_factor": 0.901,
       "avg_voltage_fluctuation": 2.457,
@@ -984,184 +1112,184 @@
   ],
   "alert_events": [
     {
-      "hour": 15,
-      "voltage": 235.1022803671,
-      "stability_score": 74.8,
+      "hour": 7,
+      "voltage": 230.5723802941,
+      "stability_score": 82.52,
       "overload": 1,
       "fault": 0,
       "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 4.5kW. AI initiating load shedding."
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 4.4kW. Initiating load shedding."
     },
     {
-      "hour": 10,
-      "voltage": 231.1454696803,
-      "stability_score": 74.7,
-      "overload": 0,
+      "hour": 4,
+      "voltage": 226.1995603613,
+      "stability_score": 91.58,
+      "overload": 1,
       "fault": 1,
       "alert_type": "CRITICAL",
-      "alert_message": "Transformer fault detected. Voltage: 231.1V. Switching to battery backup."
+      "alert_message": "\u26a1 AI detected transformer fault. Voltage: 226.2V. Switching to battery backup."
     },
     {
-      "hour": 3,
-      "voltage": 236.8878866792,
-      "stability_score": 74.3,
-      "overload": 0,
-      "fault": 1,
-      "alert_type": "CRITICAL",
-      "alert_message": "Transformer fault detected. Voltage: 236.9V. Switching to battery backup."
-    },
-    {
-      "hour": 11,
-      "voltage": 223.2004932094,
-      "stability_score": 64.7,
+      "hour": 2,
+      "voltage": 224.0000220995,
+      "stability_score": 83.8,
       "overload": 1,
       "fault": 0,
       "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 1.7kW. AI initiating load shedding."
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 5.8kW. Initiating load shedding."
     },
     {
-      "hour": 6,
-      "voltage": 240.4485748156,
-      "stability_score": 80.4,
-      "overload": 0,
-      "fault": 1,
-      "alert_type": "CRITICAL",
-      "alert_message": "Transformer fault detected. Voltage: 240.4V. Switching to battery backup."
+      "hour": 21,
+      "voltage": 238.9494215778,
+      "stability_score": 89.73,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 2.4kW. Initiating load shedding."
     },
     {
       "hour": 12,
-      "voltage": 237.5263200552,
-      "stability_score": 75.9,
+      "voltage": 228.6319672173,
+      "stability_score": 86.13,
       "overload": 1,
       "fault": 0,
       "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 10.8kW. AI initiating load shedding."
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 1.2kW. Initiating load shedding."
     },
     {
-      "hour": 16,
-      "voltage": 230.1115827828,
-      "stability_score": 50.5,
-      "overload": 1,
-      "fault": 1,
-      "alert_type": "CRITICAL",
-      "alert_message": "Transformer fault detected. Voltage: 230.1V. Switching to battery backup."
-    },
-    {
-      "hour": 11,
-      "voltage": 231.2463584642,
-      "stability_score": 77.6,
-      "overload": 1,
-      "fault": 0,
-      "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 5.6kW. AI initiating load shedding."
-    },
-    {
-      "hour": 14,
-      "voltage": 230.7671059775,
-      "stability_score": 77.1,
+      "hour": 13,
+      "voltage": 232.2524786189,
+      "stability_score": 74.32,
       "overload": 0,
       "fault": 1,
       "alert_type": "CRITICAL",
-      "alert_message": "Transformer fault detected. Voltage: 230.8V. Switching to battery backup."
+      "alert_message": "\u26a1 AI detected transformer fault. Voltage: 232.3V. Switching to battery backup."
     },
     {
-      "hour": 0,
-      "voltage": 225.8055366299,
-      "stability_score": 67.7,
+      "hour": 5,
+      "voltage": 225.6014131931,
+      "stability_score": 93.55,
       "overload": 1,
       "fault": 0,
       "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 6.6kW. AI initiating load shedding."
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 8.0kW. Initiating load shedding."
     },
     {
-      "hour": 11,
-      "voltage": 230.4141628526,
-      "stability_score": 75.0,
+      "hour": 2,
+      "voltage": 232.9696094343,
+      "stability_score": 87.23,
       "overload": 1,
       "fault": 0,
       "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 3.6kW. AI initiating load shedding."
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 7.0kW. Initiating load shedding."
     },
     {
-      "hour": 11,
-      "voltage": 232.434682787,
-      "stability_score": 73.7,
+      "hour": 10,
+      "voltage": 238.9011732528,
+      "stability_score": 86.49,
       "overload": 1,
       "fault": 0,
       "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 1.3kW. AI initiating load shedding."
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 7.7kW. Initiating load shedding."
     },
     {
-      "hour": 6,
-      "voltage": 230.7232369224,
-      "stability_score": 73.6,
+      "hour": 21,
+      "voltage": 236.5129519839,
+      "stability_score": 66.97,
       "overload": 1,
       "fault": 0,
       "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 6.4kW. AI initiating load shedding."
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 3.6kW. Initiating load shedding."
     },
     {
-      "hour": 3,
-      "voltage": 220.956597157,
-      "stability_score": 68.0,
+      "hour": 12,
+      "voltage": 236.0701968233,
+      "stability_score": 80.76,
+      "overload": 0,
+      "fault": 1,
+      "alert_type": "CRITICAL",
+      "alert_message": "\u26a1 AI detected transformer fault. Voltage: 236.1V. Switching to battery backup."
+    },
+    {
+      "hour": 9,
+      "voltage": 223.1557995356,
+      "stability_score": 97.18,
       "overload": 1,
       "fault": 0,
       "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 2.1kW. AI initiating load shedding."
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 2.4kW. Initiating load shedding."
     },
     {
-      "hour": 20,
-      "voltage": 237.1600483568,
+      "hour": 1,
+      "voltage": 230.2433402158,
       "stability_score": 73.4,
       "overload": 1,
       "fault": 0,
       "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 8.9kW. AI initiating load shedding."
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 4.1kW. Initiating load shedding."
     },
     {
       "hour": 3,
-      "voltage": 233.5035030606,
-      "stability_score": 74.8,
-      "overload": 1,
-      "fault": 0,
-      "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 11.3kW. AI initiating load shedding."
+      "voltage": 227.4002908129,
+      "stability_score": 87.93,
+      "overload": 0,
+      "fault": 1,
+      "alert_type": "CRITICAL",
+      "alert_message": "\u26a1 AI detected transformer fault. Voltage: 227.4V. Switching to battery backup."
     },
     {
-      "hour": 15,
-      "voltage": 242.1067105834,
-      "stability_score": 67.3,
-      "overload": 1,
-      "fault": 0,
-      "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 9.1kW. AI initiating load shedding."
-    },
-    {
-      "hour": 14,
-      "voltage": 228.8963562152,
-      "stability_score": 66.3,
-      "overload": 1,
-      "fault": 0,
-      "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 8.2kW. AI initiating load shedding."
-    },
-    {
-      "hour": 19,
-      "voltage": 237.9457365082,
-      "stability_score": 77.8,
-      "overload": 1,
-      "fault": 0,
-      "alert_type": "WARNING",
-      "alert_message": "Overload in grid. Load: 8.1kW. AI initiating load shedding."
-    },
-    {
-      "hour": 11,
-      "voltage": 229.1589161395,
-      "stability_score": 63.7,
+      "hour": 18,
+      "voltage": 228.8434952854,
+      "stability_score": 94.36,
       "overload": 1,
       "fault": 1,
       "alert_type": "CRITICAL",
-      "alert_message": "Transformer fault detected. Voltage: 229.2V. Switching to battery backup."
+      "alert_message": "\u26a1 AI detected transformer fault. Voltage: 228.8V. Switching to battery backup."
+    },
+    {
+      "hour": 18,
+      "voltage": 235.7201379198,
+      "stability_score": 87.23,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 2.0kW. Initiating load shedding."
+    },
+    {
+      "hour": 4,
+      "voltage": 228.1746526707,
+      "stability_score": 93.27,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 5.5kW. Initiating load shedding."
+    },
+    {
+      "hour": 13,
+      "voltage": 234.4588213996,
+      "stability_score": 87.26,
+      "overload": 0,
+      "fault": 1,
+      "alert_type": "CRITICAL",
+      "alert_message": "\u26a1 AI detected transformer fault. Voltage: 234.5V. Switching to battery backup."
+    },
+    {
+      "hour": 8,
+      "voltage": 238.972624242,
+      "stability_score": 84.45,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 3.1kW. Initiating load shedding."
+    },
+    {
+      "hour": 13,
+      "voltage": 234.6459478077,
+      "stability_score": 92.39,
+      "overload": 1,
+      "fault": 0,
+      "alert_type": "WARNING",
+      "alert_message": "\ud83d\udd34 AI detected overload. Load: 10.0kW. Initiating load shedding."
     }
   ],
   "summary_stats": {
@@ -1171,8 +1299,8 @@
     "avg_load_kw": 6.0,
     "avg_grid_frequency": 50.002,
     "avg_stability_score": 86.6,
-    "total_overload_events": 4956,
-    "total_fault_events": 1460,
+    "total_overload_events": 13814,
+    "total_fault_events": 7020,
     "avg_voltage": 230.0,
     "avg_power_factor": 0.9
   }

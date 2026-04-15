@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import DashboardPage from './pages/Dashboard';
+import SolarForecast from './pages/SolarForecast';
+import LoadManager from './pages/LoadManager';
 import PlaceholderPage from './pages/PlaceholderPage';
 import './styles/App.css';
 
@@ -10,6 +12,8 @@ export default function App() {
 
   const renderPage = () => {
     if (activePage === 'dashboard') return <DashboardPage />;
+    if (activePage === 'solar') return <SolarForecast />;
+    if (activePage === 'load') return <LoadManager />;
     return <PlaceholderPage pageId={activePage} />;
   };
 

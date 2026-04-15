@@ -1,0 +1,120 @@
+{
+  "solar_action": {
+    "algorithm": "GradientBoostingClassifier",
+    "features": [
+      "Solar_Irradiance",
+      "Temperature",
+      "Humidity",
+      "Rainfall",
+      "Wind_Speed",
+      "Battery_Level",
+      "Solar_kW",
+      "hour",
+      "month"
+    ],
+    "classes": [
+      "BALANCED",
+      "REDUCE LOAD",
+      "STORE EXCESS"
+    ],
+    "test_accuracy": 100.0,
+    "cv_accuracy": 100.0
+  },
+  "grid_stability": {
+    "algorithm": "GradientBoostingClassifier",
+    "features": [
+      "Voltage (V)",
+      "Current (A)",
+      "Power Consumption (kW)",
+      "Reactive Power (kVAR)",
+      "Power Factor",
+      "Solar Power (kW)",
+      "Wind Power (kW)",
+      "Grid Supply (kW)",
+      "Voltage Fluctuation (%)",
+      "Temperature (\u00b0C)",
+      "Humidity (%)",
+      "Electricity Price (USD/kWh)",
+      "Predicted Load (kW)",
+      "Voltage_Dev",
+      "hour",
+      "month"
+    ],
+    "classes": [
+      "STABLE",
+      "WARNING"
+    ],
+    "test_accuracy": 95.9667,
+    "cv_accuracy": 96.0467
+  },
+  "overload_detector": {
+    "algorithm": "GradientBoostingClassifier (oversampled)",
+    "features": [
+      "Voltage (V)",
+      "Current (A)",
+      "Power Consumption (kW)",
+      "Reactive Power (kVAR)",
+      "Power Factor",
+      "Solar Power (kW)",
+      "Wind Power (kW)",
+      "Grid Supply (kW)",
+      "Voltage Fluctuation (%)",
+      "Temperature (\u00b0C)",
+      "Humidity (%)",
+      "Electricity Price (USD/kWh)",
+      "Predicted Load (kW)",
+      "Voltage_Dev",
+      "hour",
+      "month"
+    ],
+    "test_accuracy": 77.1229,
+    "note": "Trained on oversampled balanced dataset"
+  },
+  "fault_detector": {
+    "algorithm": "GradientBoostingClassifier (oversampled)",
+    "features": [
+      "Voltage (V)",
+      "Current (A)",
+      "Power Consumption (kW)",
+      "Reactive Power (kVAR)",
+      "Power Factor",
+      "Solar Power (kW)",
+      "Wind Power (kW)",
+      "Grid Supply (kW)",
+      "Voltage Fluctuation (%)",
+      "Temperature (\u00b0C)",
+      "Humidity (%)",
+      "Electricity Price (USD/kWh)",
+      "Predicted Load (kW)",
+      "Voltage_Dev",
+      "hour",
+      "month"
+    ],
+    "test_accuracy": 90.755,
+    "note": "Trained on oversampled balanced dataset"
+  },
+  "load_forecaster": {
+    "algorithm": "GradientBoostingRegressor",
+    "features": [
+      "Solar_Irradiance",
+      "Temperature",
+      "Wind_Speed",
+      "Humidity",
+      "Rainfall",
+      "Solar_Power_Generated",
+      "Wind_Power_Generated",
+      "Hydro_Power_Generated",
+      "Battery_Level",
+      "Battery_Input_Output",
+      "Aux_Backup_Power",
+      "Grid_Frequency",
+      "Energy_Cost",
+      "hour",
+      "month",
+      "dayofweek"
+    ],
+    "r2_score": 0.21902,
+    "mae": 80.6873,
+    "cv_r2": 0.27094
+  }
+}

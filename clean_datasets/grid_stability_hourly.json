@@ -13,7 +13,7 @@
   },
   {
     "hour":1,
-    "avg_stability":86.615,
+    "avg_stability":86.613,
     "avg_voltage":230.17,
     "avg_power_factor":0.901,
     "avg_voltage_fluctuation":2.478,
@@ -61,7 +61,7 @@
   },
   {
     "hour":5,
-    "avg_stability":86.49,
+    "avg_stability":86.491,
     "avg_voltage":229.959,
     "avg_power_factor":0.9,
     "avg_voltage_fluctuation":2.475,
@@ -97,7 +97,7 @@
   },
   {
     "hour":8,
-    "avg_stability":86.302,
+    "avg_stability":86.301,
     "avg_voltage":229.737,
     "avg_power_factor":0.899,
     "avg_voltage_fluctuation":2.524,
@@ -109,7 +109,7 @@
   },
   {
     "hour":9,
-    "avg_stability":86.631,
+    "avg_stability":86.63,
     "avg_voltage":230.094,
     "avg_power_factor":0.9,
     "avg_voltage_fluctuation":2.487,
@@ -133,7 +133,7 @@
   },
   {
     "hour":11,
-    "avg_stability":86.616,
+    "avg_stability":86.617,
     "avg_voltage":230.179,
     "avg_power_factor":0.899,
     "avg_voltage_fluctuation":2.517,
@@ -145,7 +145,7 @@
   },
   {
     "hour":12,
-    "avg_stability":86.403,
+    "avg_stability":86.404,
     "avg_voltage":229.935,
     "avg_power_factor":0.898,
     "avg_voltage_fluctuation":2.521,
@@ -181,7 +181,7 @@
   },
   {
     "hour":15,
-    "avg_stability":86.645,
+    "avg_stability":86.644,
     "avg_voltage":229.926,
     "avg_power_factor":0.901,
     "avg_voltage_fluctuation":2.482,
@@ -205,7 +205,7 @@
   },
   {
     "hour":17,
-    "avg_stability":86.382,
+    "avg_stability":86.383,
     "avg_voltage":230.053,
     "avg_power_factor":0.899,
     "avg_voltage_fluctuation":2.51,
@@ -229,7 +229,7 @@
   },
   {
     "hour":19,
-    "avg_stability":86.955,
+    "avg_stability":86.956,
     "avg_voltage":229.978,
     "avg_power_factor":0.901,
     "avg_voltage_fluctuation":2.457,

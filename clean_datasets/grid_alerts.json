@@ -1,452 +1,452 @@
 [
   {
-    "hour":15,
-    "voltage":235.1022803671,
-    "stability_score":74.8,
+    "hour":7,
+    "voltage":230.5723802941,
+    "stability_score":82.52,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 4.5kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 4.4kW. Initiating load shedding."
   },
   {
-    "hour":10,
-    "voltage":231.1454696803,
-    "stability_score":74.7,
-    "overload":0,
+    "hour":4,
+    "voltage":226.1995603613,
+    "stability_score":91.58,
+    "overload":1,
     "fault":1,
     "alert_type":"CRITICAL",
-    "alert_message":"Transformer fault detected. Voltage: 231.1V. Switching to battery backup."
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 226.2V. Switching to battery backup."
   },
   {
-    "hour":3,
-    "voltage":236.8878866792,
-    "stability_score":74.3,
-    "overload":0,
-    "fault":1,
-    "alert_type":"CRITICAL",
-    "alert_message":"Transformer fault detected. Voltage: 236.9V. Switching to battery backup."
-  },
-  {
-    "hour":11,
-    "voltage":223.2004932094,
-    "stability_score":64.7,
+    "hour":2,
+    "voltage":224.0000220995,
+    "stability_score":83.8,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 1.7kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 5.8kW. Initiating load shedding."
   },
   {
-    "hour":6,
-    "voltage":240.4485748156,
-    "stability_score":80.4,
-    "overload":0,
-    "fault":1,
-    "alert_type":"CRITICAL",
-    "alert_message":"Transformer fault detected. Voltage: 240.4V. Switching to battery backup."
+    "hour":21,
+    "voltage":238.9494215778,
+    "stability_score":89.73,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 2.4kW. Initiating load shedding."
   },
   {
     "hour":12,
-    "voltage":237.5263200552,
-    "stability_score":75.9,
+    "voltage":228.6319672173,
+    "stability_score":86.13,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 10.8kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 1.2kW. Initiating load shedding."
   },
   {
-    "hour":16,
-    "voltage":230.1115827828,
-    "stability_score":50.5,
-    "overload":1,
-    "fault":1,
-    "alert_type":"CRITICAL",
-    "alert_message":"Transformer fault detected. Voltage: 230.1V. Switching to battery backup."
-  },
-  {
-    "hour":11,
-    "voltage":231.2463584642,
-    "stability_score":77.6,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 5.6kW. AI initiating load shedding."
-  },
-  {
-    "hour":14,
-    "voltage":230.7671059775,
-    "stability_score":77.1,
+    "hour":13,
+    "voltage":232.2524786189,
+    "stability_score":74.32,
     "overload":0,
     "fault":1,
     "alert_type":"CRITICAL",
-    "alert_message":"Transformer fault detected. Voltage: 230.8V. Switching to battery backup."
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 232.3V. Switching to battery backup."
   },
   {
-    "hour":0,
-    "voltage":225.8055366299,
-    "stability_score":67.7,
+    "hour":5,
+    "voltage":225.6014131931,
+    "stability_score":93.55,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 6.6kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 8.0kW. Initiating load shedding."
   },
   {
-    "hour":11,
-    "voltage":230.4141628526,
-    "stability_score":75.0,
+    "hour":2,
+    "voltage":232.9696094343,
+    "stability_score":87.23,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 3.6kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 7.0kW. Initiating load shedding."
   },
   {
-    "hour":11,
-    "voltage":232.434682787,
-    "stability_score":73.7,
+    "hour":10,
+    "voltage":238.9011732528,
+    "stability_score":86.49,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 1.3kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 7.7kW. Initiating load shedding."
   },
   {
-    "hour":6,
-    "voltage":230.7232369224,
-    "stability_score":73.6,
+    "hour":21,
+    "voltage":236.5129519839,
+    "stability_score":66.97,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 6.4kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 3.6kW. Initiating load shedding."
   },
   {
-    "hour":3,
-    "voltage":220.956597157,
-    "stability_score":68.0,
+    "hour":12,
+    "voltage":236.0701968233,
+    "stability_score":80.76,
+    "overload":0,
+    "fault":1,
+    "alert_type":"CRITICAL",
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 236.1V. Switching to battery backup."
+  },
+  {
+    "hour":9,
+    "voltage":223.1557995356,
+    "stability_score":97.18,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 2.1kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 2.4kW. Initiating load shedding."
   },
   {
-    "hour":20,
-    "voltage":237.1600483568,
+    "hour":1,
+    "voltage":230.2433402158,
     "stability_score":73.4,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 8.9kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 4.1kW. Initiating load shedding."
   },
   {
     "hour":3,
-    "voltage":233.5035030606,
-    "stability_score":74.8,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 11.3kW. AI initiating load shedding."
-  },
-  {
-    "hour":15,
-    "voltage":242.1067105834,
-    "stability_score":67.3,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 9.1kW. AI initiating load shedding."
-  },
-  {
-    "hour":14,
-    "voltage":228.8963562152,
-    "stability_score":66.3,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 8.2kW. AI initiating load shedding."
-  },
-  {
-    "hour":19,
-    "voltage":237.9457365082,
-    "stability_score":77.8,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 8.1kW. AI initiating load shedding."
-  },
-  {
-    "hour":11,
-    "voltage":229.1589161395,
-    "stability_score":63.7,
-    "overload":1,
-    "fault":1,
-    "alert_type":"CRITICAL",
-    "alert_message":"Transformer fault detected. Voltage: 229.2V. Switching to battery backup."
-  },
-  {
-    "hour":21,
-    "voltage":230.3086733823,
-    "stability_score":74.4,
+    "voltage":227.4002908129,
+    "stability_score":87.93,
     "overload":0,
     "fault":1,
     "alert_type":"CRITICAL",
-    "alert_message":"Transformer fault detected. Voltage: 230.3V. Switching to battery backup."
-  },
-  {
-    "hour":2,
-    "voltage":236.2233979037,
-    "stability_score":72.1,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 10.0kW. AI initiating load shedding."
-  },
-  {
-    "hour":12,
-    "voltage":221.9116809768,
-    "stability_score":74.1,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 3.9kW. AI initiating load shedding."
-  },
-  {
-    "hour":23,
-    "voltage":233.5041454991,
-    "stability_score":77.2,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 3.7kW. AI initiating load shedding."
-  },
-  {
-    "hour":3,
-    "voltage":229.2383122673,
-    "stability_score":65.0,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 8.8kW. AI initiating load shedding."
-  },
-  {
-    "hour":4,
-    "voltage":233.5640240248,
-    "stability_score":75.2,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 1.9kW. AI initiating load shedding."
-  },
-  {
-    "hour":5,
-    "voltage":233.7948461025,
-    "stability_score":72.0,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 9.9kW. AI initiating load shedding."
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 227.4V. Switching to battery backup."
   },
   {
     "hour":18,
-    "voltage":236.3905175198,
-    "stability_score":66.7,
+    "voltage":228.8434952854,
+    "stability_score":94.36,
+    "overload":1,
+    "fault":1,
+    "alert_type":"CRITICAL",
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 228.8V. Switching to battery backup."
+  },
+  {
+    "hour":18,
+    "voltage":235.7201379198,
+    "stability_score":87.23,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 11.6kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 2.0kW. Initiating load shedding."
   },
   {
-    "hour":2,
-    "voltage":230.9477993025,
-    "stability_score":70.9,
+    "hour":4,
+    "voltage":228.1746526707,
+    "stability_score":93.27,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 5.5kW. Initiating load shedding."
+  },
+  {
+    "hour":13,
+    "voltage":234.4588213996,
+    "stability_score":87.26,
     "overload":0,
     "fault":1,
     "alert_type":"CRITICAL",
-    "alert_message":"Transformer fault detected. Voltage: 230.9V. Switching to battery backup."
-  },
-  {
-    "hour":3,
-    "voltage":232.4523494723,
-    "stability_score":77.4,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 5.1kW. AI initiating load shedding."
-  },
-  {
-    "hour":11,
-    "voltage":238.7842736998,
-    "stability_score":81.1,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 3.3kW. AI initiating load shedding."
-  },
-  {
-    "hour":23,
-    "voltage":232.7527846641,
-    "stability_score":79.0,
-    "overload":0,
-    "fault":1,
-    "alert_type":"CRITICAL",
-    "alert_message":"Transformer fault detected. Voltage: 232.8V. Switching to battery backup."
-  },
-  {
-    "hour":12,
-    "voltage":230.2016060537,
-    "stability_score":68.3,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 4.1kW. AI initiating load shedding."
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 234.5V. Switching to battery backup."
   },
   {
     "hour":8,
-    "voltage":223.9491952829,
-    "stability_score":61.4,
-    "overload":1,
-    "fault":1,
-    "alert_type":"CRITICAL",
-    "alert_message":"Transformer fault detected. Voltage: 223.9V. Switching to battery backup."
-  },
-  {
-    "hour":23,
-    "voltage":231.5941870169,
-    "stability_score":74.7,
+    "voltage":238.972624242,
+    "stability_score":84.45,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 4.3kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 3.1kW. Initiating load shedding."
   },
   {
-    "hour":23,
-    "voltage":223.8802986662,
-    "stability_score":69.0,
-    "overload":0,
-    "fault":1,
-    "alert_type":"CRITICAL",
-    "alert_message":"Transformer fault detected. Voltage: 223.9V. Switching to battery backup."
-  },
-  {
-    "hour":11,
-    "voltage":224.9125446856,
-    "stability_score":78.4,
+    "hour":13,
+    "voltage":234.6459478077,
+    "stability_score":92.39,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 10.9kW. AI initiating load shedding."
-  },
-  {
-    "hour":21,
-    "voltage":226.2335452502,
-    "stability_score":73.0,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 6.0kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 10.0kW. Initiating load shedding."
   },
   {
     "hour":15,
-    "voltage":235.8450546293,
-    "stability_score":78.8,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 7.2kW. AI initiating load shedding."
-  },
-  {
-    "hour":2,
-    "voltage":229.8935980992,
-    "stability_score":75.0,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 2.7kW. AI initiating load shedding."
-  },
-  {
-    "hour":5,
-    "voltage":232.1334742115,
-    "stability_score":71.5,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 9.1kW. AI initiating load shedding."
-  },
-  {
-    "hour":23,
-    "voltage":228.2130616767,
-    "stability_score":68.4,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 9.5kW. AI initiating load shedding."
-  },
-  {
-    "hour":7,
-    "voltage":219.5443764982,
-    "stability_score":74.3,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 1.8kW. AI initiating load shedding."
-  },
-  {
-    "hour":14,
-    "voltage":232.1827990208,
-    "stability_score":73.2,
+    "voltage":225.8735401958,
+    "stability_score":90.79,
     "overload":0,
     "fault":1,
     "alert_type":"CRITICAL",
-    "alert_message":"Transformer fault detected. Voltage: 232.2V. Switching to battery backup."
-  },
-  {
-    "hour":17,
-    "voltage":225.1168984207,
-    "stability_score":73.2,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 9.5kW. AI initiating load shedding."
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 225.9V. Switching to battery backup."
   },
   {
     "hour":3,
-    "voltage":220.6554429676,
-    "stability_score":76.0,
-    "overload":1,
-    "fault":0,
-    "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 9.9kW. AI initiating load shedding."
-  },
-  {
-    "hour":5,
-    "voltage":229.9921409631,
-    "stability_score":63.1,
+    "voltage":230.1879214058,
+    "stability_score":87.63,
     "overload":0,
     "fault":1,
     "alert_type":"CRITICAL",
-    "alert_message":"Transformer fault detected. Voltage: 230.0V. Switching to battery backup."
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 230.2V. Switching to battery backup."
   },
   {
-    "hour":20,
-    "voltage":227.5846947416,
-    "stability_score":70.7,
+    "hour":21,
+    "voltage":219.8748004316,
+    "stability_score":84.11,
+    "overload":0,
+    "fault":1,
+    "alert_type":"CRITICAL",
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 219.9V. Switching to battery backup."
+  },
+  {
+    "hour":23,
+    "voltage":225.5135340929,
+    "stability_score":93.74,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 3.4kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 6.9kW. Initiating load shedding."
+  },
+  {
+    "hour":13,
+    "voltage":227.146797849,
+    "stability_score":78.1,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 8.7kW. Initiating load shedding."
   },
   {
     "hour":19,
-    "voltage":228.8691235616,
-    "stability_score":72.3,
+    "voltage":227.1043794518,
+    "stability_score":76.7,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 8.7kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 8.5kW. Initiating load shedding."
+  },
+  {
+    "hour":20,
+    "voltage":226.3626759677,
+    "stability_score":86.73,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 9.4kW. Initiating load shedding."
+  },
+  {
+    "hour":14,
+    "voltage":225.8908128352,
+    "stability_score":92.05,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 7.6kW. Initiating load shedding."
+  },
+  {
+    "hour":21,
+    "voltage":226.3754292312,
+    "stability_score":87.55,
+    "overload":0,
+    "fault":1,
+    "alert_type":"CRITICAL",
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 226.4V. Switching to battery backup."
+  },
+  {
+    "hour":22,
+    "voltage":226.7834510003,
+    "stability_score":83.99,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 5.0kW. Initiating load shedding."
+  },
+  {
+    "hour":5,
+    "voltage":223.9462868669,
+    "stability_score":86.35,
+    "overload":1,
+    "fault":1,
+    "alert_type":"CRITICAL",
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 223.9V. Switching to battery backup."
+  },
+  {
+    "hour":23,
+    "voltage":232.5657763811,
+    "stability_score":80.98,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 7.1kW. Initiating load shedding."
+  },
+  {
+    "hour":10,
+    "voltage":225.0095268612,
+    "stability_score":77.99,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 5.9kW. Initiating load shedding."
+  },
+  {
+    "hour":19,
+    "voltage":223.6064926461,
+    "stability_score":92.2,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 3.2kW. Initiating load shedding."
+  },
+  {
+    "hour":1,
+    "voltage":227.0473771508,
+    "stability_score":93.08,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 5.1kW. Initiating load shedding."
+  },
+  {
+    "hour":22,
+    "voltage":229.2726920537,
+    "stability_score":96.77,
+    "overload":0,
+    "fault":1,
+    "alert_type":"CRITICAL",
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 229.3V. Switching to battery backup."
+  },
+  {
+    "hour":14,
+    "voltage":228.4079821297,
+    "stability_score":78.1,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 3.1kW. Initiating load shedding."
+  },
+  {
+    "hour":11,
+    "voltage":227.8296308912,
+    "stability_score":77.58,
+    "overload":0,
+    "fault":1,
+    "alert_type":"CRITICAL",
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 227.8V. Switching to battery backup."
+  },
+  {
+    "hour":5,
+    "voltage":224.9001564062,
+    "stability_score":93.49,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 8.5kW. Initiating load shedding."
+  },
+  {
+    "hour":21,
+    "voltage":245.6955699864,
+    "stability_score":78.89,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 4.0kW. Initiating load shedding."
   },
   {
     "hour":16,
-    "voltage":232.8487255103,
-    "stability_score":76.1,
+    "voltage":234.4815509289,
+    "stability_score":86.17,
     "overload":1,
     "fault":0,
     "alert_type":"WARNING",
-    "alert_message":"Overload in grid. Load: 11.0kW. AI initiating load shedding."
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 10.7kW. Initiating load shedding."
+  },
+  {
+    "hour":10,
+    "voltage":223.5006279632,
+    "stability_score":93.28,
+    "overload":0,
+    "fault":1,
+    "alert_type":"CRITICAL",
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 223.5V. Switching to battery backup."
+  },
+  {
+    "hour":17,
+    "voltage":235.8584109861,
+    "stability_score":93.98,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 7.6kW. Initiating load shedding."
+  },
+  {
+    "hour":17,
+    "voltage":233.2556812091,
+    "stability_score":90.53,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 3.4kW. Initiating load shedding."
+  },
+  {
+    "hour":23,
+    "voltage":230.2626318411,
+    "stability_score":96.71,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 3.4kW. Initiating load shedding."
+  },
+  {
+    "hour":23,
+    "voltage":231.3033688291,
+    "stability_score":77.21,
+    "overload":0,
+    "fault":1,
+    "alert_type":"CRITICAL",
+    "alert_message":"\u26a1 AI detected transformer fault. Voltage: 231.3V. Switching to battery backup."
+  },
+  {
+    "hour":7,
+    "voltage":225.8739356223,
+    "stability_score":75.04,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 10.0kW. Initiating load shedding."
+  },
+  {
+    "hour":7,
+    "voltage":227.0627436257,
+    "stability_score":94.26,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 11.1kW. Initiating load shedding."
+  },
+  {
+    "hour":11,
+    "voltage":222.2028211044,
+    "stability_score":90.01,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 5.2kW. Initiating load shedding."
+  },
+  {
+    "hour":19,
+    "voltage":230.5040193523,
+    "stability_score":89.8,
+    "overload":1,
+    "fault":0,
+    "alert_type":"WARNING",
+    "alert_message":"\ud83d\udd34 AI detected overload. Load: 6.3kW. Initiating load shedding."
   }
 ]
