@@ -232,3 +232,93 @@ body::after {
 .leaflet-popup-tip {
   background: #020817 !important;
 }
+
+/* =====================================================
+   RESPONSIVE OVERRIDES (MOBILE, TABLET, LAPTOP)
+   ===================================================== */
+
+/* Desktop hidden by default */
+.mobile-menu-btn { display: none; }
+
+@media (max-width: 768px) {
+  /* 1. HEADER (TOP BAR) */
+  .header-main { padding: 12px; gap: 10px; flex-wrap: wrap; }
+  .header-title-wrap { flex-direction: row; align-items: center; }
+  .mobile-menu-btn {
+    display: block !important;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 12px;
+  }
+  .live-time { font-size: clamp(12px, 2vw, 18px); }
+  .live-ist { display: none; }
+  .header-right { gap: 5px !important; }
+  .header-chip { padding: 4px 6px !important; font-size: 1rem !important; }
+  .header-context-bar { flex-direction: column; text-align: center; gap: 4px; height: auto; padding: 10px; }
+
+  /* 2. SIDEBAR (LEFT PANEL) */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 260px;
+    height: 100vh;
+    z-index: 9999;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--sidebar-grad-start);
+    border-right: 1px solid var(--border);
+    box-shadow: 5px 0 20px rgba(0,0,0,0.5);
+  }
+  body.sidebar-open .sidebar { transform: translateX(0); }
+
+  /* OVERLAY (Dim background when sidebar opens) */
+  body.sidebar-open::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(2px);
+    z-index: 9998;
+  }
+
+  .main-content { margin-left: 0; padding-top: calc(var(--header-h) + 60px); }
+
+  /* 3. DASHBOARD CARDS */
+  .stat-cards-row, .dashboard-grid, .solar-grid, .village-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 10px;
+  }
+
+  /* 4. AI ALERTS */
+  .alert-row { flex-direction: column; padding: 12px; gap: 8px; width: 100%; box-sizing: border-box; }
+  .alert-actions, .alert-buttons {
+    flex-direction: column; width: 100%; gap: 8px; margin-top: 8px;
+  }
+  .alert-buttons button { width: 100%; justify-content: center; }
+  .alert-item-content { flex-direction: column; width: 100%; }
+
+  /* 5. MODALS */
+  .modal-overlay .modal-content, .admin-panel-content, .login-glass, .admin-modal, .admin-panel {
+    max-width: 90% !important;
+    width: 90% !important;
+    margin: 20px auto;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  /* 6. TEXT SCALING & 7. SPACING */
+  .page-wrapper { padding: 12px; gap: 10px; }
+  .header-page-title, .panel-title, .stat-card-value { font-size: clamp(12px, 2vw, 18px); }
+
+  /* General Spacing fixes */
+  .stat-card, .panel-card { padding: 12px; gap: 10px; }
+}
+
+/* 9. PREVENT OVERFLOW */
+body, html, #root, .app-layout { overflow-x: hidden; }
+

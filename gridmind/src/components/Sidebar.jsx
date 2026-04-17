@@ -54,7 +54,10 @@ export default function Sidebar({ activePage, onNavigate, alertCount }) {
             <div
               key={item.id}
               className={`nav-item${isActive ? ' active' : ''}`}
-              onClick={() => onNavigate(item.id)}
+              onClick={() => {
+                onNavigate(item.id);
+                document.body.classList.remove('sidebar-open');
+              }}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => e.key === 'Enter' && onNavigate(item.id)}

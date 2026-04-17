@@ -43,6 +43,13 @@ export default function Header({ activePage, isLightMode, toggleTheme, apiConnec
 
           {/* Left — page title */}
           <div className="header-title-wrap">
+            <button 
+              className="mobile-menu-btn" 
+              onClick={() => document.body.classList.toggle('sidebar-open')} 
+              aria-label="Toggle Menu"
+            >
+              ☰
+            </button>
             <div className="header-page-title">{title}</div>
             <div className="header-page-subtitle">
               GRIDMIND AI · Raigad Microgrid
