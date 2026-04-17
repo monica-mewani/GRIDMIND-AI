@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid,
-  Tooltip, ResponsiveContainer, ReferenceLine, ReferenceArea
+  Tooltip, ResponsiveContainer, ReferenceLine
 } from 'recharts';
-import { Sun, AlertTriangle, Database, Bot, Zap, Cloud, X as XIcon } from 'lucide-react';
-import { solarData, masterData } from '../data/kaggleData';
+import { Sun, AlertTriangle, Database, Bot, Cloud, X as XIcon } from 'lucide-react';
+import { solarData as rawSolarData, masterData } from '../data/kaggleData';
 import '../styles/SolarForecast.css';
+
+// FIXED #1: Defensive safe array — never let module-level crash propagate
+const solarData = Array.isArray(rawSolarData) ? rawSolarData : [];
 
 /* ── 7-day forecast base data ── */
 const FORECAST_BASE = [
@@ -23,29 +26,30 @@ const FORECAST = FORECAST_BASE.map(r => {
   const weatherStr = r.rainfall > 0.5 ? '🌧️ Rain' : r.rainfall > 0.2 ? '⛅ Partly Cloudy' : r.humidity > 70 ? '🌥️ Cloudy' : '☀️ Clear';
   const icon = weatherStr.split(' ')[0];
   const wText = weatherStr.substring(weatherStr.indexOf(' ') + 1);
-  
-  let action = '';
-  let actionClass = '';
+  let action = '', actionClass = '';
   if (r.kw > 6) { action = 'STORE EXCESS'; actionClass = 'action-store'; }
   else if (r.kw >= 3) { action = 'BALANCED'; actionClass = 'action-balanced'; }
   else if (r.kw > 1) { action = 'REDUCE LOAD'; actionClass = 'action-reduce'; }
   else { action = 'IMPORT NEEDED'; actionClass = 'action-import'; }
-  
   return { ...r, weather: wText, icon, conf, action, actionClass };
 });
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
   const d = payload[0]?.payload;
+  // FIXED: Safely extract payload values using dataKey to avoid crashing on 'band' array
+  const kwPayload = payload.find(p => p.dataKey === 'kw');
+  const fcstPayload = payload.find(p => p.dataKey === 'fcst');
+  const kwVal = Number(kwPayload?.value) || 0;
+  const fcstVal = Number(fcstPayload?.value) || 0;
+
   return (
     <div className="sf-tooltip">
       <div className="sf-tooltip-time">{label}</div>
-      <div className="sf-tooltip-actual">{payload[0].value?.toFixed(2) || 0} kW <span>actual</span></div>
-      {payload[1] && <div className="sf-tooltip-fcst">{payload[1].value?.toFixed(2) || 0} kW forecast</div>}
+      <div className="sf-tooltip-actual">{kwVal.toFixed(2)} kW <span>actual</span></div>
+      <div className="sf-tooltip-fcst">{fcstVal.toFixed(2)} kW forecast</div>
       {d?.weather && <div className="sf-tooltip-weather">🌤 {d.weather}</div>}
-      {d?.hour >= 7 && d?.hour <= 9 && (
-        <div className="sf-tooltip-note">⚠️ Dust haze −8%</div>
-      )}
+      {d?.hour >= 7 && d?.hour <= 9 && <div className="sf-tooltip-note">⚠️ Dust haze −8%</div>}
     </div>
   );
 };
@@ -58,57 +62,87 @@ export default function SolarForecast() {
 
   useEffect(() => {
     setAnimIn(true);
-    const tick = () => {
-      const h = new Date().getHours();
-      setNowHour(h);
-      setChartData(solarData.map(r => ({
-        ...r,
-        kw: r.hour === h ? Math.max(0, r.avg_solar_kw + (Math.random() - 0.5) * 0.4) : r.avg_solar_kw,
-        fcst: r.avg_forecast_kw,
-        time: r.time_label,
-        band: [Math.min(r.avg_solar_kw, r.avg_forecast_kw), Math.max(r.avg_solar_kw, r.avg_forecast_kw)]
-      })));
+    // FIXED #1: All data access wrapped in try-catch + null guards
+    const buildChartData = () => {
+      try {
+        if (!solarData || solarData.length === 0) return;
+        const h = new Date().getHours();
+        setNowHour(h);
+        setChartData(solarData.map(r => ({
+          ...r,
+          kw: r.hour === h
+            ? Math.max(0, (r.avg_solar_kw ?? 0) + (Math.random() - 0.5) * 0.4)
+            : (r.avg_solar_kw ?? 0),
+          fcst: r.avg_forecast_kw ?? 0,
+          time: r.time_label ?? `${r.hour ?? 0}:00`,
+          band: [
+            Math.min(r.avg_solar_kw ?? 0, r.avg_forecast_kw ?? 0),
+            Math.max(r.avg_solar_kw ?? 0, r.avg_forecast_kw ?? 0),
+          ]
+        })));
+      } catch (err) {
+        console.warn('[SolarForecast] data build error:', err);
+      }
     };
-    tick();
-    const id = setInterval(tick, 4000);
+    buildChartData();
+    const id = setInterval(buildChartData, 4000);
     return () => clearInterval(id);
   }, []);
 
-  const nowRow  = chartData.find(r => r.hour === nowHour) || solarData[nowHour] || {};
-  
-  let peakVal = 0, peakIndex = 0, maxIrr = 0, maxIrrIndex = 0;
-  solarData.forEach((d, i) => {
-    if (d.avg_solar_kw > peakVal) { peakVal = d.avg_solar_kw; peakIndex = i; }
-    if (d.avg_irradiance > maxIrr) { maxIrr = d.avg_irradiance; maxIrrIndex = i; }
-  });
-  const peakTimeLabel = solarData[peakIndex]?.time_label || '1PM';
-  const maxIrrTimeLabel = solarData[maxIrrIndex]?.time_label || '1PM';
+  // FIXED #1: All derived values use safe optional chaining
+  const nowRow = chartData.find(r => r.hour === nowHour) ?? solarData[nowHour] ?? {};
 
-  const avg7day = masterData?.summary_stats?.avg_solar_kw?.toFixed(1) || '6.5';
+  let peakVal = 0, peakIndex = 0, maxIrr = 0, maxIrrIndex = 0;
+  // FIXED #1: Safe forEach — guard is at top
+  if (solarData.length > 0) {
+    solarData.forEach((d, i) => {
+      if ((d.avg_solar_kw ?? 0) > peakVal) { peakVal = d.avg_solar_kw ?? 0; peakIndex = i; }
+      if ((d.avg_irradiance ?? 0) > maxIrr) { maxIrr = d.avg_irradiance ?? 0; maxIrrIndex = i; }
+    });
+  }
+  const peakTimeLabel = solarData[peakIndex]?.time_label ?? '1PM';
+  const maxIrrTimeLabel = solarData[maxIrrIndex]?.time_label ?? '1PM';
+  const avg7day = masterData?.summary_stats?.avg_solar_kw?.toFixed(1) ?? '6.5';
 
   const getActionColor = (action) => {
-    if (action === "STORE EXCESS") return "#00FF88";
-    if (action === "BALANCED") return "#FFD60A";
-    if (action === "REDUCE LOAD" || action === "IMPORT NEEDED") return "#FF2D55";
-    return "#00FF88";
+    if (action === 'STORE EXCESS') return '#00FF88';
+    if (action === 'BALANCED') return '#FFD60A';
+    if (action === 'REDUCE LOAD' || action === 'IMPORT NEEDED') return '#FF2D55';
+    return '#00FF88';
   };
-  
+
   const aiActionStyle = {
     color: getActionColor(nowRow?.ai_action),
     animation: nowRow?.ai_action === 'IMPORT NEEDED' ? 'pulse 2s infinite' : 'none'
   };
 
-  // Pre-monsoon advisory logic
-  const next6Hours = [];
-  for (let i = 0; i < 6; i++) {
-    next6Hours.push(solarData[(nowHour + i) % 24] || solarData[0]);
-  }
+  // FIXED #1: Safe next 6 hours — guard against empty solarData
+  const next6Hours = solarData.length > 0
+    ? Array.from({ length: 6 }, (_, i) => solarData[(nowHour + i) % 24] ?? solarData[0])
+    : [];
   const badHourOffset = next6Hours.findIndex(d => d.ai_action === 'REDUCE LOAD' || d.ai_action === 'IMPORT NEEDED');
   const isAdvisory = badHourOffset !== -1;
   const badHourData = isAdvisory ? next6Hours[badHourOffset] : null;
 
-  // Cloud risk blocks
-  const cloudRisks = chartData.filter(d => d.avg_rainfall > 0.3);
+  const cloudRisks = chartData.filter(d => (d.avg_rainfall ?? 0) > 0.3);
+
+  // FIXED #1: Show loading spinner until chart data is ready — prevents blank white screen
+  if (solarData.length === 0 || chartData.length === 0) {
+    return (
+      <div style={{
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
+        height: 400, gap: 16,
+        color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontSize: '0.9rem'
+      }}>
+        <div style={{ fontSize: 32 }}>☀️</div>
+        <div>⚡ Loading solar data...</div>
+        <div style={{ fontSize: '0.75rem', opacity: 0.6 }}>
+          Connecting to Kaggle dataset
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`sf-page ${animIn ? 'sf-anim' : ''}`}>
@@ -125,7 +159,7 @@ export default function SolarForecast() {
           </div>
         </div>
         <div style={{display:'flex', gap:'12px', flexWrap:'wrap', alignItems:'center'}}>
-          <div onClick={() => setIsModalOpen(true)} style={{display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', textTransform: 'uppercase', padding: '6px 12px', borderRadius: '4px', cursor:'pointer', border:'1px solid rgba(0,255,136,0.3)', background:'rgba(0,255,136,0.05)', color: '#00FF88', fontWeight: 600}}>
+          <div onClick={() => setIsModalOpen(true)} style={{display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', textTransform: 'uppercase', padding: '6px 12px', borderRadius: '4px', cursor:'pointer', border:'1px solid var(--border)', background:'var(--primary-dim)', color: '#00FF88', fontWeight: 600}}>
             <Bot size={14} />
             🤖 Solar Action Classifier · 99.9% Accuracy
           </div>
@@ -138,12 +172,12 @@ export default function SolarForecast() {
 
       {isModalOpen && (
         <div style={{position:'fixed', top:0, left:0, right:0, bottom:0, background:'rgba(0,0,0,0.6)', zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center'}} onClick={() => setIsModalOpen(false)}>
-          <div style={{background:'rgba(10,20,28,0.95)', padding:'24px', borderRadius:'12px', border:'1px solid rgba(0,255,136,0.3)', width:'400px', backdropFilter:'blur(12px)'}} onClick={e => e.stopPropagation()}>
+          <div style={{background:'var(--bg-surface)', padding:'24px', borderRadius:'12px', border:'1px solid var(--primary-glow)', width:'400px', backdropFilter:'blur(12px)'}} onClick={e => e.stopPropagation()}>
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: '16px'}}>
               <h3 style={{margin:0, display:'flex', alignItems:'center', gap:'8px', color:'#00FF88'}}><Bot size={18} /> XGBoost Classifier Model</h3>
-              <XIcon size={18} style={{cursor:'pointer', color:'rgba(255,255,255,0.6)'}} onClick={() => setIsModalOpen(false)} />
+              <XIcon size={18} style={{cursor:'pointer', color:'var(--text-muted)'}} onClick={() => setIsModalOpen(false)} />
             </div>
-            <div style={{lineHeight:'1.6', fontSize:'0.9rem', color:'rgba(255,255,255,0.9)'}}>
+            <div style={{lineHeight:'1.6', fontSize:'0.9rem', color:'var(--text-primary)'}}>
               <strong style={{color:'#00FF88'}}>Features:</strong> Solar_Irradiance, Temperature, Humidity, Rainfall, hour, Wind_Speed, Battery_Level (7 features)<br/>
               <strong style={{color:'#00FF88'}}>Training samples:</strong> 500<br/>
               <strong style={{color:'#00FF88'}}>CV Accuracy:</strong> 99.9%<br/>
@@ -157,13 +191,13 @@ export default function SolarForecast() {
       {/* ── KPI Row ── */}
       <div className="sf-kpi-row">
         {[
-          { label: 'Now',          value: `${nowRow?.kw?.toFixed(1) ?? '--'} kW`, color: '#00FF88', icon: '⚡' },
-          { label: 'Today Peak',   value: `${peakVal.toFixed(1)} kW @ ${peakTimeLabel}`, color: '#FFD60A', icon: '☀️' },
-          { label: '7-Day Avg',    value: `${avg7day} kW`, color: '#0EA5E9', icon: '📊' },
-          { label: 'System Cap.',  value: '10 kW installed', color: 'var(--text-muted)', icon: '🏭' },
-          { label: 'AI Action',    value: nowRow?.ai_action || 'BALANCED', color: aiActionStyle.color, icon: '🤖' },
+          { label: 'Now',         value: `${(nowRow?.kw ?? nowRow?.avg_solar_kw ?? 0).toFixed(1)} kW`, color: '#00FF88', icon: '⚡' },
+          { label: 'Today Peak',  value: `${peakVal.toFixed(1)} kW @ ${peakTimeLabel}`, color: '#FFD60A', icon: '☀️' },
+          { label: '7-Day Avg',   value: `${avg7day} kW`, color: '#0EA5E9', icon: '📊' },
+          { label: 'System Cap.', value: '10 kW installed', color: 'var(--text-muted)', icon: '🏭' },
+          { label: 'AI Action',   value: nowRow?.ai_action ?? 'BALANCED', color: aiActionStyle.color, icon: '🤖' },
         ].map(k => (
-          <div key={k.label} className="sf-kpi-card glass-card" style={k.label === 'AI Action' ? { backgroundColor: aiActionStyle.animation !== 'none' ? 'transparent' : k.color === '#FF2D55' ? 'rgba(255,45,85,0.1)' : k.color === '#FFD60A' ? 'rgba(255,214,10,0.1)' : 'rgba(0,255,136,0.1)', animation: aiActionStyle.animation } : {}}>
+          <div key={k.label} className="sf-kpi-card glass-card">
             <div className="sf-kpi-icon">{k.icon}</div>
             <div className="sf-kpi-val" style={{ color: k.color }}>{k.value}</div>
             <div className="sf-kpi-label">{k.label}</div>
@@ -191,8 +225,8 @@ export default function SolarForecast() {
           <div className="sf-chart-legend">
             <span className="legend-item" style={{ color: '#00FF88' }}>─ Actual</span>
             <span className="legend-item" style={{ color: '#FFD60A' }}>╌ Forecast</span>
-            <span className="legend-item" style={{ color: 'rgba(0,255,136,0.3)' }}>▒ AI Confidence Band</span>
-            <span className="legend-item" style={{ color: 'rgba(128,128,128,0.7)' }}>▒ Cloud Risk</span>
+            <span className="legend-item" style={{ color: 'var(--primary-glow)' }}>▒ AI Confidence Band</span>
+            <span className="legend-item" style={{ color: 'var(--text-muted)' }}>▒ Cloud Risk</span>
           </div>
         </div>
 
@@ -206,12 +240,12 @@ export default function SolarForecast() {
                 </linearGradient>
               </defs>
 
-              {/* Cloud Risk Shading */}
               {cloudRisks.map(cr => (
-                <ReferenceLine key={`cr_${cr.hour}`} x={cr.time} strokeWidth={24} stroke="rgba(128,128,128,0.1)" label={{ position: 'top', value: '☁️ Cloud Risk', fill: 'rgba(128,128,128,0.5)', fontSize: 9 }} />
+                <ReferenceLine key={`cr_${cr.hour}`} x={cr.time} strokeWidth={24} stroke="var(--border)"
+                  label={{ position: 'top', value: '☁️', fill: 'var(--text-muted)', fontSize: 9 }} />
               ))}
 
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,255,136,0.06)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
               <XAxis dataKey="time"
                 tick={(props) => {
                   const { x, y, payload } = props;
@@ -221,33 +255,27 @@ export default function SolarForecast() {
                   if (row?.ai_action === 'REDUCE LOAD' || row?.ai_action === 'IMPORT NEEDED') icon = '↓';
                   return (
                     <g transform={`translate(${x},${y})`}>
-                      <text x={0} y={0} dy={12} textAnchor="middle" fill="rgba(240,255,248,0.35)" fontSize={9} fontFamily={'JetBrains Mono'}>{payload.value}</text>
+                      <text x={0} y={0} dy={12} textAnchor="middle" fill="var(--text-muted)" fontSize={9} fontFamily="JetBrains Mono">{payload.value}</text>
                       {icon && <text x={0} y={0} dy={24} textAnchor="middle" fill={icon === '↑' ? '#00FF88' : '#FF2D55'} fontSize={12} fontWeight={800}>{icon}</text>}
                     </g>
                   );
                 }}
-                axisLine={false} tickLine={false}
-                interval={2}
+                axisLine={false} tickLine={false} interval={2}
               />
               <YAxis
-                tick={{ fill: 'rgba(240,255,248,0.35)', fontSize: 9, fontFamily: 'JetBrains Mono' }}
+                tick={{ fill: 'var(--text-muted)', fontSize: 9, fontFamily: 'JetBrains Mono' }}
                 axisLine={false} tickLine={false}
-                domain={[0, 10.5]} tickCount={6}
-                unit=" kW"
+                domain={[0, 10.5]} tickCount={6} unit=" kW"
               />
               <Tooltip content={<CustomTooltip />} />
-              
-              {/* Peak window marker */}
+
               <ReferenceLine x={maxIrrTimeLabel} stroke="rgba(255,214,10,0.5)" strokeDasharray="3 3"
                 label={{ value: 'Peak Irradiance Window', fill: '#FFD60A', fontSize: 9, position: 'insideTopLeft' }} />
-                
-              {/* Now marker */}
-              <ReferenceLine x={nowRow?.time || '12AM'} stroke="rgba(0,255,136,0.6)" strokeWidth={1.5}
+
+              <ReferenceLine x={nowRow?.time ?? nowRow?.time_label ?? ''} stroke="rgba(0,255,136,0.6)" strokeWidth={1.5}
                 label={{ value: 'NOW ▼', fill: '#00FF88', fontSize: 10, position: 'top' }} strokeDasharray="4 4" />
 
-              {/* Confidence Band */}
-              <Area type="monotone" dataKey="band" stroke="none" fill="rgba(0,255,136,0.1)" />
-
+              <Area type="monotone" dataKey="band" stroke="none" fill="var(--primary-dim)" />
               <Area type="monotone" dataKey="kw" stroke="#00FF88" strokeWidth={2.5}
                 fill="url(#solarGradFull)" dot={false}
                 activeDot={{ r: 5, fill: '#00FF88', stroke: '#040f1e', strokeWidth: 2 }} />
@@ -260,7 +288,7 @@ export default function SolarForecast() {
         <div className="sf-chart-note" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Cloud size={14} color="#0EA5E9" />
           <span>
-            ☁️ {nowRow?.weather || 'Rainy'} · AI: <strong>[{nowRow?.ai_action || 'BALANCED'}]</strong> · Monsoon pre-season, Raigad · Irradiance: <strong>{nowRow?.avg_irradiance?.toFixed(0) || 0} W/m²</strong>
+            ☁️ {nowRow?.weather ?? 'Clear'} · AI: <strong>[{nowRow?.ai_action ?? 'BALANCED'}]</strong> · Monsoon pre-season, Raigad · Irradiance: <strong>{(nowRow?.avg_irradiance ?? 0).toFixed(0)} W/m²</strong>
           </span>
         </div>
       </div>
@@ -307,7 +335,7 @@ export default function SolarForecast() {
                   <td>
                     <div className="sf-conf-wrap">
                       <div className="sf-conf-ring" style={{
-                        background: `conic-gradient(${parseFloat(row.conf) > 90 ? '#00FF88' : parseFloat(row.conf) > 80 ? '#FFD60A' : '#FF6B35'} ${parseFloat(row.conf) * 3.6}deg, rgba(255,255,255,0.05) 0deg)`
+                        background: `conic-gradient(${parseFloat(row.conf) > 90 ? '#00FF88' : parseFloat(row.conf) > 80 ? '#FFD60A' : '#FF6B35'} ${parseFloat(row.conf) * 3.6}deg, var(--border) 0deg)`
                       }}>
                         <div className="sf-conf-inner">{row.conf}%</div>
                       </div>
@@ -325,12 +353,12 @@ export default function SolarForecast() {
 
       {/* ── Advisory + Badge row ── */}
       <div className="sf-bottom-row" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) auto', gap: '24px' }}>
-        <div className="sf-advisory glass-card" style={{ flex: 1, borderLeft: isAdvisory ? '4px solid #FF2D55' : '4px solid #00FF88', background: isAdvisory ? 'rgba(255,45,85,0.05)' : 'rgba(0,255,136,0.05)'}}>
+        <div className="sf-advisory glass-card" style={{ flex: 1, borderLeft: isAdvisory ? '4px solid #FF2D55' : '4px solid #00FF88', background: isAdvisory ? 'var(--danger-dim)' : 'var(--primary-dim)'}}>
           {isAdvisory ? <AlertTriangle size={20} color="#FF2D55" className="sf-adv-icon" /> : <Sun size={20} color="#00FF88" className="sf-adv-icon" />}
           <div>
             <div className="sf-adv-text" style={{ fontSize: '0.95rem' }}>
               {isAdvisory ? (
-                <span><strong>⚠️ Pre-monsoon advisory:</strong> Increase battery reserves. Solar dropping to <strong>{badHourData?.avg_solar_kw?.toFixed(1) || 0}kW</strong> in <strong>{badHourOffset}</strong> hours. Coordinate with MSEDCL for backup.</span>
+                <span><strong>⚠️ Pre-monsoon advisory:</strong> Increase battery reserves. Solar dropping to <strong>{(badHourData?.avg_solar_kw ?? 0).toFixed(1)}kW</strong> in <strong>{badHourOffset}</strong> hours.</span>
               ) : (
                 <span><strong>✅ Optimal generation window.</strong> Store excess in battery now. Peak: <strong>{peakVal.toFixed(1)}kW</strong> at <strong>{peakTimeLabel}</strong> IST</span>
               )}
@@ -341,7 +369,7 @@ export default function SolarForecast() {
         <div className="sf-kaggle-badge glass-card" style={{ width: 'max-content' }}>
           <Database size={14} />
           <div className="sf-adv-text" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-            Data source: Kaggle Solar Power Generation Dataset (India Plant)
+            Data source: Kaggle Solar Power Generation Dataset
           </div>
         </div>
       </div>

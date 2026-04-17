@@ -8,7 +8,7 @@
   left: var(--sidebar-w);
   right: 0;
   height: var(--header-h);
-  background: rgba(2, 8, 23, 0.85);
+  background: var(--header-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
@@ -135,6 +135,15 @@
   white-space: nowrap;
 }
 
+button.header-chip {
+  cursor: pointer;
+  outline: none;
+}
+
+button.header-chip:focus {
+  box-shadow: 0 0 0 2px var(--primary-dim);
+}
+
 .header-chip:hover {
   border-color: var(--border-strong);
 }
@@ -142,13 +151,13 @@
 .chip-weather {
   color: var(--secondary);
   border-color: var(--secondary-dim);
-  background: rgba(255, 107, 53, 0.05);
+  background: var(--secondary-dim);
 }
 
 .chip-health {
   color: var(--primary);
   border-color: var(--primary-dim);
-  background: rgba(0, 255, 136, 0.05);
+  background: var(--primary-dim);
 }
 
 .chip-health-dot {
@@ -167,8 +176,8 @@
   left: var(--sidebar-w);
   right: 0;
   height: 28px;
-  background: rgba(0, 255, 136, 0.03);
-  border-bottom: 1px solid rgba(0, 255, 136, 0.08);
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,5 +201,6 @@
 }
 
 .context-bar-highlight {
-  color: rgba(0, 255, 136, 0.6);
+  color: var(--primary);
+  opacity: 0.8;
 }

@@ -20,8 +20,9 @@ const CustomTooltip = ({ active, payload, label }) => {
   const d = payload[0]?.payload;
   return (
     <div style={{
-      background: 'rgba(4,15,30,0.95)', border: '1px solid rgba(0,255,136,0.25)',
-      borderRadius: 10, padding: '10px 14px', backdropFilter: 'blur(12px)'
+      background: 'var(--bg-surface)', border: '1px solid var(--border)',
+      borderRadius: 10, padding: '10px 14px', backdropFilter: 'blur(12px)',
+      boxShadow: 'var(--shadow-card)'
     }}>
       <div style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginBottom: 4 }}>{label}</div>
       <div style={{ fontSize: 18, fontFamily: 'var(--font-head)', fontWeight: 700, color: '#00FF88' }}>
@@ -41,7 +42,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-export default function SolarGeneration() {
+export default function SolarGeneration({ apiData }) {
   const [chartData, setChartData] = useState(baseChartData);
   const [nowHour, setNowHour]     = useState(new Date().getHours());
 
@@ -49,16 +50,32 @@ export default function SolarGeneration() {
     const tick = () => {
       const h = new Date().getHours();
       setNowHour(h);
-      setChartData(baseChartData.map(row => ({
-        ...row,
-        kw: row.hour === h
-          ? +(row.kw + (Math.random() - 0.5) * 0.3).toFixed(2)
-          : row.kw,
-      })));
+      
+      setChartData(baseChartData.map(row => {
+        if (row.hour === h) {
+          // If we have API data, use its live current_kw and action
+          if (apiData && apiData.current_kw !== undefined) {
+            return {
+              ...row,
+              kw: apiData.current_kw,
+              weather: apiData.weather || row.weather,
+              action: apiData.ai_action || row.action
+            };
+          }
+          // Otherwise fake live wiggle
+          return {
+            ...row,
+            kw: +(row.kw + (Math.random() - 0.5) * 0.3).toFixed(2),
+          };
+        }
+        return row;
+      }));
     };
+
+    tick();
     const id = setInterval(tick, 3000);
     return () => clearInterval(id);
-  }, []);
+  }, [apiData]);
 
   const peakRow = [...chartData].sort((a, b) => b.kw - a.kw)[0];
   const avg     = (chartData.reduce((s, r) => s + r.kw, 0) / chartData.length).toFixed(2);
@@ -118,14 +135,14 @@ export default function SolarGeneration() {
                 <stop offset="100%" stopColor="#FFD60A" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,255,136,0.06)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
             <XAxis dataKey="time"
-              tick={{ fill: 'rgba(240,255,248,0.3)', fontSize: 8, fontFamily: 'JetBrains Mono' }}
+              tick={{ fill: 'var(--text-muted)', fontSize: 8, fontFamily: 'JetBrains Mono' }}
               axisLine={false} tickLine={false}
               interval={5}
             />
             <YAxis
-              tick={{ fill: 'rgba(240,255,248,0.3)', fontSize: 9, fontFamily: 'JetBrains Mono' }}
+              tick={{ fill: 'var(--text-muted)', fontSize: 9, fontFamily: 'JetBrains Mono' }}
               axisLine={false} tickLine={false} domain={[0, 11]} tickCount={5}
             />
             <Tooltip content={<CustomTooltip />} />

@@ -2,14 +2,24 @@ import { useState, useEffect } from 'react';
 import { RadialBarChart, RadialBar, ResponsiveContainer, Tooltip } from 'recharts';
 import { loadData } from '../data/kaggleData';
 
-function getZones() {
-  const h   = new Date().getHours();
-  const row = loadData[h];
-  const noise = () => (Math.random() - 0.5) * 0.2;
-  const bhatan    = +(row.bhatan_kw    + noise()).toFixed(2);
-  const somathne  = +(row.somathne_kw  + noise()).toFixed(2);
-  const palaspe   = +(row.palaspe_kw   + noise()).toFixed(2);
-  const kalamboli = +(row.kalamboli_kw + noise()).toFixed(2);
+function getZones(apiData) {
+  let bhatan, somathne, palaspe, kalamboli;
+  
+  if (apiData && apiData.bhatan) {
+    bhatan = apiData.bhatan.load_kw;
+    somathne = apiData.somathne.load_kw;
+    palaspe = apiData.palaspe.load_kw;
+    kalamboli = apiData.kalamboli.load_kw;
+  } else {
+    const h   = new Date().getHours();
+    const row = loadData[h];
+    const noise = () => (Math.random() - 0.5) * 0.2;
+    bhatan    = +(row.bhatan_kw    + noise()).toFixed(2);
+    somathne  = +(row.somathne_kw  + noise()).toFixed(2);
+    palaspe   = +(row.palaspe_kw   + noise()).toFixed(2);
+    kalamboli = +(row.kalamboli_kw + noise()).toFixed(2);
+  }
+  
   const total = bhatan + somathne + palaspe + kalamboli;
   return [
     { name: 'Bhatan Village',      kw: bhatan,    pct: +((bhatan   /total)*100).toFixed(1), color: '#00FF88', sub: '680 homes · residential' },
@@ -24,8 +34,9 @@ const CustomTooltip = ({ active, payload }) => {
   const d = payload[0].payload;
   return (
     <div style={{
-      background: 'rgba(4,15,30,0.95)', border: `1px solid ${d.color}44`,
-      borderRadius: 8, padding: '8px 12px', backdropFilter: 'blur(12px)'
+      background: 'var(--bg-surface)', border: `1px solid ${d.color}44`,
+      borderRadius: 8, padding: '8px 12px', backdropFilter: 'blur(12px)',
+      boxShadow: 'var(--shadow-card)'
     }}>
       <div style={{ fontSize: 11, color: d.color, fontWeight: 700, fontFamily: 'var(--font-head)' }}>{d.name}</div>
       <div style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginTop: 2 }}>{d.sub}</div>
@@ -36,14 +47,14 @@ const CustomTooltip = ({ active, payload }) => {
   );
 };
 
-export default function ZoneLoad() {
+export default function ZoneLoad({ apiData }) {
   const [aiOn,  setAiOn]  = useState(false);
-  const [zones, setZones] = useState(getZones);
+  const [zones, setZones] = useState(() => getZones(apiData));
 
   useEffect(() => {
-    const id = setInterval(() => setZones(getZones()), 3000);
+    const id = setInterval(() => setZones(getZones(apiData)), 3000);
     return () => clearInterval(id);
-  }, []);
+  }, [apiData]);
 
   const displayZones = aiOn
     ? zones.map(z => z.priority
@@ -72,7 +83,7 @@ export default function ZoneLoad() {
             onClick={() => setAiOn(v => !v)}
             style={{
               width: 36, height: 20, borderRadius: 10, border: 'none', cursor: 'pointer',
-              background: aiOn ? 'linear-gradient(90deg, #00cc6a, #00FF88)' : 'rgba(255,255,255,0.1)',
+              background: aiOn ? 'linear-gradient(90deg, var(--primary-dark), var(--primary))' : 'var(--border)',
               position: 'relative', transition: 'all 0.3s',
               boxShadow: aiOn ? '0 0 10px rgba(0,255,136,0.5)' : 'none'
             }}
@@ -97,7 +108,7 @@ export default function ZoneLoad() {
         <ResponsiveContainer width="100%" height="100%">
           <RadialBarChart cx="50%" cy="50%" innerRadius={20} outerRadius={88}
             data={chartData} startAngle={90} endAngle={-270} barSize={14} barGap={4}>
-            <RadialBar background={{ fill: 'rgba(255,255,255,0.04)' }} dataKey="value" cornerRadius={6} />
+            <RadialBar background={{ fill: 'var(--border)' }} dataKey="value" cornerRadius={6} />
             <Tooltip content={<CustomTooltip />} />
           </RadialBarChart>
         </ResponsiveContainer>

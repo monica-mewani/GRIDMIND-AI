@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { stabilityData } from '../data/kaggleData';
+import { useCrisis } from '../context/CrisisContext';
 
 function polarToXY(cx, cy, r, angleDeg) {
   const rad = ((angleDeg - 90) * Math.PI) / 180;
@@ -12,11 +13,17 @@ function arcPath(cx, cy, r, startAngle, endAngle) {
   return `M ${s.x} ${s.y} A ${r} ${r} 0 ${large} 1 ${e.x} ${e.y}`;
 }
 
-export default function GridStability() {
+export default function GridStability({ apiData }) {
+  const { crisisStep } = useCrisis();
+
   const getTarget = () => {
+    if (crisisStep >= 2 && crisisStep < 8) return 28;
+    if (apiData && apiData.stability_score) {
+      return apiData.stability_score;
+    }
     const h = new Date().getHours();
     const row = stabilityData[h];
-    return +(row.avg_stability + (Math.random() - 0.5) * 3).toFixed(1);
+    return +(row?.avg_stability + (Math.random() - 0.5) * 3).toFixed(1);
   };
 
   const [target,   setTarget]   = useState(getTarget);
@@ -42,8 +49,10 @@ export default function GridStability() {
 
   // Initial animation from 0
   useEffect(() => {
-    animateTo(0, target);
-    prevTarget.current = target;
+    animateTo(prevTarget.current, getTarget());
+    prevTarget.current = getTarget();
+    setTarget(getTarget());
+    
     const id = setInterval(() => {
       const t = getTarget();
       animateTo(prevTarget.current, t);
@@ -51,7 +60,7 @@ export default function GridStability() {
       setTarget(t);
     }, 4000);
     return () => { clearInterval(id); cancelAnimationFrame(raf.current); };
-  }, []);
+  }, [apiData, crisisStep]);
 
   const cx = 100, cy = 100, r = 72;
   const startAngle = -135, totalArc = 270;
@@ -61,7 +70,13 @@ export default function GridStability() {
   const label = pct > 0.7 ? 'STABLE' : pct > 0.4 ? 'WARNING' : 'CRITICAL';
 
   const h = new Date().getHours();
-  const row = stabilityData[h];
+  // Override local row data with apiData properties mapped to match our UI
+  const row = apiData && apiData.voltage !== undefined ? {
+    avg_voltage: apiData.voltage,
+    avg_power_factor: apiData.power_factor,
+    overload_rate: apiData.overload_rate_pct / 100, // backend returns pct
+    fault_rate: apiData.fault_rate_pct / 100
+  } : stabilityData[h];
 
   return (
     <div className="glass-card panel-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -89,11 +104,11 @@ export default function GridStability() {
           const a = startAngle + (i / 10) * totalArc;
           const inner = polarToXY(cx, cy, 58, a);
           const outer = polarToXY(cx, cy, 65, a);
-          return <line key={i} x1={inner.x} y1={inner.y} x2={outer.x} y2={outer.y} stroke="rgba(240,255,248,0.12)" strokeWidth={1} />;
+          return <line key={i} x1={inner.x} y1={inner.y} x2={outer.x} y2={outer.y} stroke="var(--border)" strokeWidth={1} />;
         })}
         {/* Track */}
         <path d={arcPath(cx, cy, r, startAngle, startAngle + totalArc)}
-          fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth={13} strokeLinecap="round" />
+          fill="none" stroke="var(--bg-card-hover)" strokeWidth={13} strokeLinecap="round" />
         {/* Zone bands */}
         <path d={arcPath(cx, cy, r, startAngle, startAngle + totalArc * 0.4)}
           fill="none" stroke="rgba(255,45,85,0.2)"   strokeWidth={13} strokeLinecap="round" />
@@ -109,7 +124,7 @@ export default function GridStability() {
         <text x={cx} y={cy - 10} textAnchor="middle" fill={color} fontSize={30} fontWeight={700} fontFamily="Space Grotesk, sans-serif">
           {Math.round(animated)}
         </text>
-        <text x={cx} y={cy + 10} textAnchor="middle" fill="rgba(240,255,248,0.45)" fontSize={10} fontFamily="JetBrains Mono, monospace">/ 100</text>
+        <text x={cx} y={cy + 10} textAnchor="middle" fill="var(--text-muted)" fontSize={10} fontFamily="JetBrains Mono, monospace">/ 100</text>
         <text x={cx} y={cy + 26} textAnchor="middle" fill={color} fontSize={12} fontWeight={700} fontFamily="Space Grotesk, sans-serif">{label}</text>
         {/* Scale labels */}
         <text x={28} y={122} textAnchor="middle" fill="rgba(255,45,85,0.5)"   fontSize={8} fontFamily="JetBrains Mono">CRIT</text>
@@ -126,8 +141,8 @@ export default function GridStability() {
           { label: 'Fault Rate',   value: `${((row?.fault_rate ?? 0)*100).toFixed(1)}%`,    color: '#FF2D55' },
         ].map(s => (
           <div key={s.label} style={{
-            background: 'rgba(255,255,255,0.03)', borderRadius: 7,
-            padding: '7px 10px', border: '1px solid rgba(255,255,255,0.06)'
+            background: 'var(--bg-card)', borderRadius: 7,
+            padding: '7px 10px', border: '1px solid var(--border)'
           }}>
             <div style={{ fontSize: 9, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginBottom: 2 }}>{s.label}</div>
             <div style={{ fontSize: 13, fontWeight: 700, color: s.color, fontFamily: 'var(--font-head)' }}>{s.value}</div>

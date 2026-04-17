@@ -120,13 +120,13 @@
   gap: 16px;
   padding: 16px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   transition: all 0.2s;
 }
 
 .lm-priority-item:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--bg-card-hover);
 }
 
 .lm-priority-indicator {
@@ -201,7 +201,7 @@
 }
 
 .lm-timeline-segment + .lm-timeline-segment {
-  border-top: 1px dashed rgba(255, 255, 255, 0.05);
+  border-top: 1px dashed var(--border);
 }
 
 .lm-segment-dot {
@@ -263,7 +263,7 @@
 }
 
 .lm-toast {
-  background: rgba(10, 20, 28, 0.95);
+  background: var(--bg-surface);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(0, 255, 136, 0.3);
   border-radius: 12px;

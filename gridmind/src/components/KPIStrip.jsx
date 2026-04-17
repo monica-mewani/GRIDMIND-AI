@@ -3,18 +3,33 @@ import { masterData, loadData, solarData } from '../data/kaggleData';
 
 const stats = masterData.summary_stats;
 
-function getLiveKPIs() {
+function getLiveKPIs(apiData) {
   const h     = new Date().getHours();
   const solar = solarData[h];
   const load  = loadData[h];
   const noise = (n) => (Math.random() - 0.5) * n;
 
-  const solarKw = +(solar.avg_solar_kw + noise(0.3)).toFixed(2);
-  const loadKw  = +(load.avg_load_kw   + noise(0.2)).toFixed(2);
-  const surplus = +(solarKw - loadKw).toFixed(2);
-  const savedKwh  = +(solarKw * 0.25 + noise(0.1)).toFixed(1);   // rolling 15-min
-  const savedINR  = Math.round(savedKwh * stats.avg_grid_frequency * 1.8 + noise(5));
-  const co2       = +(savedKwh * 0.82).toFixed(1);
+  let solarKw, loadKw, surplus, savedKwh, savedINR, co2, v1, v2;
+
+  if (apiData && apiData.kpis) {
+    solarKw = apiData.kpis.total_generation_kw;
+    loadKw = apiData.kpis.total_consumption_kw;
+    surplus = +(solarKw - loadKw).toFixed(2);
+    savedKwh = solarKw * 0.25;
+    savedINR = apiData.kpis.savings_inr;
+    co2 = apiData.kpis.co2_avoided_kg;
+    v1 = apiData.grid.stability_score;
+    v2 = apiData.grid.voltage;
+  } else {
+    solarKw = +(solar.avg_solar_kw + noise(0.3)).toFixed(2);
+    loadKw  = +(load.avg_load_kw   + noise(0.2)).toFixed(2);
+    surplus = +(solarKw - loadKw).toFixed(2);
+    savedKwh  = +(solarKw * 0.25 + noise(0.1)).toFixed(1);   // rolling 15-min
+    savedINR  = Math.round(savedKwh * stats.avg_grid_frequency * 1.8 + noise(5));
+    co2       = +(savedKwh * 0.82).toFixed(1);
+    v1 = stats.avg_stability_score;
+    v2 = stats.avg_voltage;
+  }
 
   return [
     {
@@ -36,23 +51,23 @@ function getLiveKPIs() {
       color: '#00FF88', icon: '🌿', sub: `vs diesel · ${stats.avg_power_factor} PF`,
     },
     {
-      id: 'villages', label: 'Grid Stability', value: stats.avg_stability_score, unit: '/100',
+      id: 'villages', label: 'Grid Stability', value: v1, unit: '/100',
       color: '#FFD60A', icon: '📡', sub: `${stats.total_overload_events.toLocaleString()} overloads logged`,
     },
     {
-      id: 'loadshed', label: 'Voltage', value: stats.avg_voltage, unit: 'V',
+      id: 'loadshed', label: 'Voltage', value: v2, unit: 'V',
       color: '#FF6B35', icon: '🔌', sub: `India std: 230V · 50.002 Hz`,
     },
   ];
 }
 
-export default function KPIStrip() {
-  const [kpis, setKpis] = useState(getLiveKPIs);
+export default function KPIStrip({ apiData }) {
+  const [kpis, setKpis] = useState(() => getLiveKPIs(apiData));
 
   useEffect(() => {
-    const id = setInterval(() => setKpis(getLiveKPIs()), 3000);
+    const id = setInterval(() => setKpis(getLiveKPIs(apiData)), 3000);
     return () => clearInterval(id);
-  }, []);
+  }, [apiData]);
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10, gridColumn: '1 / -1' }}>

@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useCrisis } from '../context/CrisisContext';
+import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import '../styles/Header.css';
 
 const PAGE_TITLES = {
@@ -23,7 +25,7 @@ function getISTTime() {
   return `${h}:${m}:${s}`;
 }
 
-export default function Header({ activePage }) {
+export default function Header({ activePage, isLightMode, toggleTheme, apiConnected, role, roleLabel, roleIcon, onAdminClick, onLogout }) {
   const [time, setTime] = useState(getISTTime());
 
   useEffect(() => {
@@ -60,15 +62,66 @@ export default function Header({ activePage }) {
             <div className="live-ist">Indian Standard Time (IST)</div>
           </div>
 
-          {/* Right — weather + health */}
-          <div className="header-right">
-            <div className="header-chip chip-weather">
-              ☀️ Sunny 36°C&nbsp;&nbsp;Panvel
-            </div>
-            <div className="header-chip chip-health">
-              <div className="chip-health-dot" />
-              91% System Healthy
-            </div>
+          {/* FIXED: header alignment + removed simulate crisis & temperature */}
+          <div className="header-right" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 10, flexWrap: 'nowrap', flexShrink: 0 }}>
+
+            {/* FIXED #2: Icon-only theme toggle  */}
+            <button 
+              className="header-chip theme-toggle" 
+              onClick={toggleTheme}
+              title={`Switch to ${isLightMode ? 'Dark' : 'Light'} Mode`}
+              style={{ fontSize: '1.1rem', padding: '6px 10px', lineHeight: 1 }}
+            >
+              {isLightMode ? '🌙' : '☀️'}
+            </button>
+
+            {/* FIXED #3: Role badge — lives here, no overlap */}
+            {role && (
+              <button
+                onClick={role === 'admin' ? onAdminClick : undefined}
+                title={role === 'admin' ? 'Open Admin Panel' : `Logged in as ${role}`}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 5,
+                  padding: '5px 11px', borderRadius: '99px',
+                  fontFamily: 'var(--font-mono)', fontSize: '0.78rem', fontWeight: 700,
+                  cursor: role === 'admin' ? 'pointer' : 'default', border: '1.5px solid',
+                  ...(role === 'admin' ? {
+                    color: '#00FF88',
+                    background: 'rgba(0,255,136,0.12)',
+                    borderColor: '#00FF88',
+                    boxShadow: '0 0 10px rgba(0,255,136,0.4)',
+                  } : role === 'operator' ? {
+                    color: 'var(--warning)',
+                    background: 'rgba(255,196,0,0.08)',
+                    borderColor: 'rgba(255,196,0,0.4)',
+                  } : {
+                    color: 'var(--text-muted)',
+                    background: 'transparent',
+                    borderColor: 'var(--border)',
+                  })
+                }}
+              >
+                {roleIcon} {roleLabel}
+              </button>
+            )}
+
+            {/* FIXED logout: visible for operator + viewer only */}
+            {(role === 'operator' || role === 'viewer') && (
+              <button
+                onClick={onLogout}
+                title="Log Out"
+                style={{
+                  background: 'rgba(255,45,85,0.08)',
+                  border: '1px solid rgba(255,45,85,0.35)',
+                  color: 'var(--danger)', borderRadius: '99px',
+                  padding: '5px 11px', fontSize: '0.78rem',
+                  fontFamily: 'var(--font-head)', fontWeight: 600,
+                  cursor: 'pointer', whiteSpace: 'nowrap',
+                }}
+              >
+                🔓 Log Out
+              </button>
+            )}
           </div>
 
         </div>

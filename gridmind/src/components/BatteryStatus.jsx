@@ -1,12 +1,33 @@
 import { useEffect, useRef, useState } from 'react';
 import { batteryData } from '../data/kaggleData';
+import { useCrisis } from '../context/CrisisContext';
 
-export default function BatteryStatus() {
+export default function BatteryStatus({ apiData }) {
+  const { crisisStep } = useCrisis();
+
   const getTarget = () => {
-    const h   = new Date().getHours();
-    const row = batteryData[h];
-    const pct = Math.min(100, Math.max(0, row.avg_battery_pct + (Math.random() - 0.5) * 2));
-    return { pct: +pct.toFixed(1), status: row.status, rate: +row.avg_input_output.toFixed(2), h };
+    let basePct, baseStatus, baseRate, baseH;
+    
+    if (apiData && apiData.percentage !== undefined) {
+      basePct = apiData.percentage;
+      baseStatus = apiData.status;
+      baseRate = apiData.rate_kw;
+      baseH = apiData.ist_hour || new Date().getHours();
+    } else {
+      baseH   = new Date().getHours();
+      const row = batteryData[baseH];
+      basePct = Math.min(100, Math.max(0, row.avg_battery_pct + (Math.random() - 0.5) * 2));
+      baseStatus = row.status;
+      baseRate = +row.avg_input_output.toFixed(2);
+    }
+
+    if (crisisStep >= 3 && crisisStep < 8) {
+      basePct = Math.max(10, basePct - (crisisStep - 2) * 8);
+      baseStatus = 'Discharging';
+      baseRate = -2.8;
+    }
+
+    return { pct: +basePct.toFixed(1), status: baseStatus, rate: baseRate, h: baseH };
   };
 
   const [live, setLive]     = useState(getTarget);
@@ -30,8 +51,10 @@ export default function BatteryStatus() {
   };
 
   useEffect(() => {
-    animateTo(0, live.pct);
-    from.current = live.pct;
+    animateTo(from.current, getTarget().pct);
+    from.current = getTarget().pct;
+    setLive(getTarget());
+    
     const id = setInterval(() => {
       const t = getTarget();
       animateTo(from.current, t.pct);
@@ -39,7 +62,7 @@ export default function BatteryStatus() {
       setLive(t);
     }, 3000);
     return () => { clearInterval(id); cancelAnimationFrame(raf.current); };
-  }, []);
+  }, [apiData, crisisStep]);
 
   const CHARGE    = animated;
   const color     = CHARGE > 60 ? '#00FF88' : CHARGE > 30 ? '#FFD60A' : '#FF2D55';
@@ -77,7 +100,7 @@ export default function BatteryStatus() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
         <div style={{
           position: 'relative', width: '100%', height: 48, borderRadius: 8,
-          background: 'rgba(255,255,255,0.04)',
+          background: 'var(--border)',
           border: `1.5px solid ${color}55`, overflow: 'hidden',
           boxShadow: `0 0 12px ${color}22`
         }}>
@@ -88,7 +111,7 @@ export default function BatteryStatus() {
               return (
                 <div key={i} style={{
                   flex: 1, borderRadius: 4, overflow: 'hidden',
-                  background: isFilled ? `linear-gradient(180deg, ${color}dd, ${color}88)` : 'rgba(255,255,255,0.04)',
+                  background: isFilled ? `linear-gradient(180deg, ${color}dd, ${color}88)` : 'var(--bg-card)',
                   boxShadow: isFilled ? `0 0 6px ${color}66` : 'none',
                   transition: 'all 0.15s'
                 }}>
@@ -124,8 +147,8 @@ export default function BatteryStatus() {
           { label: 'Est. Time',    value: hoursLeft,                  color: '#FF6B35' },
         ].map(s => (
           <div key={s.label} style={{
-            background: 'rgba(255,255,255,0.03)', borderRadius: 8,
-            padding: '8px 10px', border: '1px solid rgba(255,255,255,0.06)'
+            background: 'var(--bg-card)', borderRadius: 8,
+            padding: '8px 10px', border: '1px solid var(--border)'
           }}>
             <div style={{ fontSize: 9, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginBottom: 2 }}>{s.label}</div>
             <div style={{ fontSize: 14, fontWeight: 700, color: s.color, fontFamily: 'var(--font-head)' }}>{s.value}</div>
@@ -135,8 +158,8 @@ export default function BatteryStatus() {
 
       <div style={{
         fontSize: 10, fontFamily: 'var(--font-mono)', padding: '6px 10px',
-        borderRadius: 6, background: 'rgba(255,45,85,0.06)', border: '1px solid rgba(255,45,85,0.15)',
-        color: 'rgba(255,45,85,0.8)', textAlign: 'center'
+        borderRadius: 6, background: 'var(--danger-dim)', border: '1px solid rgba(255,45,85,0.15)',
+        color: 'var(--danger)', textAlign: 'center'
       }}>
         🏥 Somathne PHC backup: <strong style={{ color: '#FF2D55' }}>
           ~{(stored / 0.4).toFixed(0)} hrs

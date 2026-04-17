@@ -234,18 +234,18 @@
   gap: 10px;
   padding: 10px 12px;
   border-radius: var(--radius-sm);
-  background: rgba(255, 45, 85, 0.05);
-  border: 1px solid rgba(255, 45, 85, 0.12);
+  background: var(--danger-dim);
+  border: 1px solid var(--border);
   transition: var(--transition);
 }
 
 .alert-row:hover {
-  background: rgba(255, 45, 85, 0.08);
+  background: var(--bg-card-hover);
 }
 
 .alert-row.warning {
-  background: rgba(255, 107, 53, 0.05);
-  border-color: rgba(255, 107, 53, 0.15);
+  background: var(--secondary-dim);
+  border-color: var(--border);
 }
 
 .alert-dot {
@@ -268,3 +268,5 @@
   font-family: var(--font-mono);
   margin-top: 2px;
 }
+@keyframes pulseRed { 0% { box-shadow: inset 0 0 0 rgba(255,45,85,0); } 50% { box-shadow: inset 0 0 100px rgba(255,45,85,0.8); } 100% { box-shadow: inset 0 0 0 rgba(255,45,85,0); } }
+.crisis-toast { position: fixed; bottom: 24px; right: 24px; background: var(--bg-surface); border: 1px solid var(--border); padding: 16px; border-radius: 12px; display: flex; gap: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 1000; align-items: flex-start; color: var(--text-base); } .success-toast { border-color: rgba(0,255,136,0.4); box-shadow: 0 10px 30px rgba(0,255,136,0.1); } .toast-icon { font-size: 20px; } .animate-toast-up { animation: toastUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; } @keyframes toastUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }

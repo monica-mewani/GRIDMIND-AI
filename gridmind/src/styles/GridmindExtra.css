@@ -1,0 +1,321 @@
+/* GridmindExtra.css
+   NEW — All styles for the added features.
+   Does NOT override any existing class names.
+   Safe: uses unique prefixes gm-ex- / gm-role- / gm-override- / gm-audit-
+*/
+
+/* ── Role Badge (shown in header area) ── */
+.gm-role-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 99px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid;
+}
+
+.gm-role-badge.admin {
+  color: var(--primary);
+  border-color: rgba(0,255,136,0.4);
+  background: rgba(0,255,136,0.06);
+}
+
+.gm-role-badge.operator {
+  color: var(--warning);
+  border-color: rgba(255,196,0,0.4);
+  background: rgba(255,196,0,0.06);
+}
+
+.gm-role-badge.viewer {
+  color: var(--text-muted);
+  border-color: var(--border);
+  background: transparent;
+}
+
+/* ── Confidence Badge inside alert cards ── */
+.gm-confidence {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-weight: 700;
+}
+
+.gm-confidence.high {
+  background: rgba(0,255,136,0.1);
+  color: var(--primary);
+  border: 1px solid rgba(0,255,136,0.3);
+}
+
+.gm-confidence.medium {
+  background: rgba(255,196,0,0.1);
+  color: var(--warning);
+  border: 1px solid rgba(255,196,0,0.3);
+}
+
+.gm-confidence.low {
+  background: rgba(255,45,85,0.1);
+  color: var(--danger);
+  border: 1px solid rgba(255,45,85,0.3);
+}
+
+/* ── Intervention Warning ── */
+.gm-intervention-warn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgba(255,196,0,0.08);
+  border: 1px solid rgba(255,196,0,0.35);
+  color: var(--warning);
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* ── Reason / Explainability box ── */
+.gm-reason-box {
+  padding: 10px 14px;
+  border-left: 3px solid var(--primary);
+  background: rgba(0,255,136,0.04);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ── New Action Buttons: Agree / Modify / Reject ── */
+.gm-action-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.gm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid;
+  font-family: var(--font-head);
+}
+
+.gm-btn-agree {
+  background: rgba(0,255,136,0.08);
+  color: var(--primary);
+  border-color: rgba(0,255,136,0.4);
+}
+.gm-btn-agree:hover {
+  background: var(--primary);
+  color: var(--bg-base);
+}
+
+.gm-btn-modify {
+  background: rgba(255,196,0,0.08);
+  color: var(--warning);
+  border-color: rgba(255,196,0,0.4);
+}
+.gm-btn-modify:hover {
+  background: rgba(255,196,0,0.2);
+}
+
+.gm-btn-reject {
+  background: rgba(255,45,85,0.08);
+  color: var(--danger);
+  border-color: rgba(255,45,85,0.4);
+}
+.gm-btn-reject:hover {
+  background: rgba(255,45,85,0.18);
+}
+
+.gm-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Viewer overlay on action bar ── */
+.gm-viewer-note {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+}
+
+/* ── Modify Modal ── */
+.gm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 7777;
+  background: rgba(2,8,23,0.7);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gm-fade-in 0.2s ease-out;
+}
+
+@keyframes gm-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.gm-modal {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 0 60px rgba(0,255,136,0.08);
+  animation: gm-slide-up 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+
+@keyframes gm-slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.gm-modal h3 {
+  margin: 0 0 16px;
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.gm-modal-field {
+  margin-bottom: 14px;
+}
+
+.gm-modal-field label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-bottom: 6px;
+}
+
+.gm-modal-field input[type="range"] {
+  width: 100%;
+  accent-color: var(--primary);
+}
+
+.gm-modal-field input[type="text"],
+.gm-modal-field textarea {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 9px 12px;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.gm-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* ── Manual Override Panel ── */
+.gm-override-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--warning);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 4px;
+  animation: gm-slide-up 0.25s ease-out;
+}
+
+.gm-override-panel h4 {
+  margin: 0 0 14px;
+  font-family: var(--font-head);
+  color: var(--warning);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gm-override-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.gm-override-row label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  min-width: 130px;
+}
+
+.gm-override-row input[type="range"] {
+  flex: 1;
+  accent-color: var(--warning);
+  min-width: 120px;
+}
+
+.gm-override-value {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--warning);
+  font-weight: 700;
+  min-width: 52px;
+  text-align: right;
+}
+
+/* ── Audit Log inline (below alerts) ── */
+.gm-audit-strip {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.gm-audit-strip h4 {
+  margin: 0 0 12px;
+  font-family: var(--font-head);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.gm-audit-entry {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.gm-audit-entry:last-child {
+  border-bottom: none;
+}

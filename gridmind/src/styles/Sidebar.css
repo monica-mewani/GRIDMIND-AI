@@ -8,7 +8,7 @@
   left: 0;
   width: var(--sidebar-w);
   height: 100vh;
-  background: linear-gradient(180deg, #030d1a 0%, #020817 100%);
+  background: linear-gradient(180deg, var(--sidebar-grad-start) 0%, var(--sidebar-grad-end) 100%);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -54,7 +54,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 16px rgba(0, 255, 136, 0.5);
+  box-shadow: 0 0 16px var(--primary-glow);
   flex-shrink: 0;
 }
 
@@ -121,16 +121,16 @@
 }
 
 .nav-item:hover {
-  background: rgba(0, 255, 136, 0.06);
+  background: var(--bg-card-hover);
   color: var(--text-primary);
   border-color: var(--border);
 }
 
 .nav-item.active {
-  background: rgba(0, 255, 136, 0.1);
+  background: var(--primary-dim);
   color: var(--primary);
-  border-color: rgba(0, 255, 136, 0.25);
-  box-shadow: inset 0 0 16px rgba(0, 255, 136, 0.05);
+  border-color: var(--border-strong);
+  box-shadow: inset 0 0 16px var(--primary-dim);
 }
 
 /* Active left indicator bar */
@@ -189,14 +189,16 @@
   font-family: var(--font-mono);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgba(0, 255, 136, 0.35);
+  color: var(--primary);
+  opacity: 0.6;
   line-height: 1.6;
 }
 
 .sidebar-footer-villages {
   margin-top: 4px;
   font-size: 10px;
-  color: rgba(0, 255, 136, 0.45);
+  color: var(--primary);
+  opacity: 0.7;
   font-family: var(--font-mono);
   letter-spacing: 0.04em;
 }

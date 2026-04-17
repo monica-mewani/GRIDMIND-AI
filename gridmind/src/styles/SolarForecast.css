@@ -167,7 +167,7 @@
 
 /* Tooltip */
 .sf-tooltip {
-  background: rgba(10, 20, 28, 0.95);
+  background: var(--bg-surface);
   backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   padding: 12px;
@@ -243,13 +243,13 @@
 
 .sf-table td {
   padding: 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border);
   font-size: 0.9rem;
   color: var(--text-base);
 }
 
 .sf-row-today {
-  background: rgba(255,255,255,0.02);
+  background: var(--bg-card);
 }
 
 .sf-td-day {
@@ -319,7 +319,7 @@
 .sf-conf-inner {
   width: 26px;
   height: 26px;
-  background: var(--surface);
+  background: var(--bg-surface);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -336,9 +336,9 @@
   font-weight: 700;
 }
 
-.action-store { background: rgba(0, 255, 136, 0.1); color: #00FF88; border: 1px solid rgba(0,255,136,0.2); }
-.action-reduce { background: rgba(255, 214, 10, 0.1); color: #FFD60A; border: 1px solid rgba(255,214,10,0.2); }
-.action-import { background: rgba(255, 45, 85, 0.1); color: #FF2D55; border: 1px solid rgba(255,45,85,0.2); }
+.action-store { background: var(--primary-dim); color: var(--primary); border: 1px solid var(--border); }
+.action-reduce { background: var(--warning-dim); color: var(--warning); border: 1px solid var(--border); }
+.action-import { background: var(--danger-dim); color: var(--danger); border: 1px solid var(--border); }
 
 
 /* Bottom Row */

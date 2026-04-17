@@ -20,7 +20,9 @@ const navItems = [
   { id: 'reports',    label: 'Reports',        icon: FileText        },
 ];
 
-export default function Sidebar({ activePage, onNavigate }) {
+export default function Sidebar({ activePage, onNavigate, alertCount }) {
+  // FIXED #6: Use dynamic alertCount prop; fall back to static value if not provided
+  const dynamicBadge = typeof alertCount === 'number' ? alertCount : 2;
   return (
     <aside className="sidebar">
       {/* ── Logo ── */}
@@ -35,7 +37,10 @@ export default function Sidebar({ activePage, onNavigate }) {
             </div>
           </div>
         </div>
-        <div className="logo-subtitle">Raigad District, MH</div>
+        {/* FIXED: updated location and removed temperature */}
+        <div className="location-info" style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}>
+          <div className="logo-subtitle" style={{ textTransform: 'uppercase' }}>Panvel, Raigad District</div>
+        </div>
       </div>
 
       {/* ── Nav ── */}
@@ -59,7 +64,11 @@ export default function Sidebar({ activePage, onNavigate }) {
                 <Icon size={16} strokeWidth={isActive ? 2.5 : 2} />
               </span>
               <span className="nav-item-label">{item.label}</span>
-              {item.badge && (
+              {/* FIXED #6: Use dynamic alert count from parent */}
+              {item.id === 'alerts' && dynamicBadge > 0 && (
+                <span className="nav-badge">{dynamicBadge}</span>
+              )}
+              {item.badge && item.id !== 'alerts' && (
                 <span className="nav-badge">{item.badge}</span>
               )}
             </div>

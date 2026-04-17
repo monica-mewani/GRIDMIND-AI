@@ -39,7 +39,7 @@ export default function LoadManager() {
     if (cls === 'VERY_LOW' || cls === 'LOW') return '#00FF88';
     if (cls === 'MEDIUM' || cls === 'HIGH') return '#FFD60A';
     if (cls === 'VERY_HIGH') return '#FF2D55';
-    return 'rgba(255,255,255,0.1)';
+    return 'var(--border)';
   };
 
   useEffect(() => {
@@ -73,13 +73,13 @@ export default function LoadManager() {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
-        <div style={{ background: 'rgba(10, 20, 28, 0.95)', padding: '12px', border: '1px solid rgba(0,255,136,0.2)', borderRadius: '8px', color: '#fff' }}>
+        <div style={{ background: 'var(--bg-surface)', padding: '12px', border: '1px solid var(--border-strong)', borderRadius: '8px', color: 'var(--text-base)' }}>
           <div style={{fontWeight: 600, marginBottom: '6px', fontSize: '0.95rem'}}>Hour: {data.hourStr}</div>
           <div style={{marginBottom: '10px', fontSize: '0.85rem'}}>
-            Predicted: <span style={{color: '#fff'}}>{data.predicted_kw.toFixed(2)} kW</span> ({data.predicted_class})<br/>
+            Predicted: <span style={{color: 'var(--text-base)'}}>{data.predicted_kw.toFixed(2)} kW</span> ({data.predicted_class})<br/>
             Confidence: <span style={{color: '#00FF88'}}>{data.confidence}%</span>
           </div>
-          <div style={{fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.4'}}>
+          <div style={{fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: '1.4'}}>
             Bhatan: {data.bhatan_kw} kW<br/>
             Somathne: {data.somathne_kw} kW<br/>
             Palaspe: {data.palaspe_kw} kW<br/>
@@ -214,10 +214,10 @@ export default function LoadManager() {
           
           {/* SECTION 1: ML Model Prediction Banner */}
           <div className="glass-card" style={{ padding: '20px', borderLeft: `4px solid ${getBorderColor(currentPred.predicted_class)}` }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px', borderBottom: '1px solid var(--border)', paddingBottom: '12px' }}>
               <div>
                 <strong style={{ fontSize: '1.05rem' }}>🤖 XGBoost Load Forecaster</strong>
-                <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', marginTop: '4px' }}>GradientBoosting · 500 estimators · 5-fold CV</div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }}>GradientBoosting · 500 estimators · 5-fold CV</div>
               </div>
               <div style={{ background: 'rgba(0,255,136,0.1)', color: '#00FF88', padding: '4px 8px', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 600, height: 'max-content' }}>
                 99.9% ACC
@@ -226,19 +226,19 @@ export default function LoadManager() {
             
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div>
-                <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>Current Hour Prediction:</div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Current Hour Prediction:</div>
                 <div style={{ fontSize: '1.2rem', fontWeight: 600, marginTop: '4px', color: getBorderColor(currentPred.predicted_class) }}>
                   [{currentPred.predicted_class}] {currentPred.predicted_kw?.toFixed(1)} kW
                 </div>
-                <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', marginTop: '2px' }}>Confidence: {currentPred.confidence}%</div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '2px' }}>Confidence: {currentPred.confidence}%</div>
               </div>
               <div>
                 <div style={{ fontSize: '0.9rem', marginBottom: '8px' }}>
-                  <span style={{ color: 'rgba(255,255,255,0.6)' }}>Next Hour: </span>
+                  <span style={{ color: 'var(--text-secondary)' }}>Next Hour: </span>
                   <strong style={{ color: getBorderColor(nextPred.predicted_class) }}>[{nextPred.predicted_class}] {nextPred.predicted_kw?.toFixed(1)} kW {nextPred.predicted_kw > currentPred.predicted_kw ? '↑' : '↓'}</strong>
                 </div>
                 <div style={{ fontSize: '0.9rem' }}>
-                  <span style={{ color: 'rgba(255,255,255,0.6)' }}>Peak Today: </span>
+                  <span style={{ color: 'var(--text-secondary)' }}>Peak Today: </span>
                   <strong style={{ color: '#FF2D55' }}>[{peakPred.predicted_class}] {peakPred.predicted_kw?.toFixed(1)} kW at {peakPred.hour} {peakPred.hour < 12 ? 'AM' : 'PM'}</strong>
                 </div>
               </div>
@@ -248,14 +248,14 @@ export default function LoadManager() {
           {/* SECTION 2: Live Load Bar Chart */}
           <div className="glass-card" style={{ padding: '20px' }}>
             <div style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '4px' }}>🤖 ML Predicted Load Distribution</div>
-            <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', marginBottom: '16px' }}>XGBoost Model · Kaggle Dataset</div>
+            <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '16px' }}>XGBoost Model · Kaggle Dataset</div>
             <div style={{ height: '220px' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={displayData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.6)' }} />
-                  <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.6)' }} unit=" kW" />
-                  <Tooltip contentStyle={{ background: 'rgba(10,20,28,0.9)', border: 'none', borderRadius: '8px' }} itemStyle={{ color: '#fff' }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'var(--text-muted)' }} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'var(--text-muted)' }} unit=" kW" />
+                  <Tooltip contentStyle={{ background: 'var(--bg-surface)', border: 'none', borderRadius: '8px' }} itemStyle={{ color: 'var(--text-base)' }} />
                   <Bar dataKey="kw" radius={[4, 4, 0, 0]}>
                     {displayData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.fill} />
@@ -280,19 +280,19 @@ export default function LoadManager() {
                       <stop offset="100%" stopColor="#FF2D55" stopOpacity={0.8}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                  <XAxis dataKey="hourStr" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.6)' }} interval={2} />
-                  <YAxis domain={[0, 12]} axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.6)' }} unit=" kW" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="hourStr" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'var(--text-muted)' }} interval={2} />
+                  <YAxis domain={[0, 12]} axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'var(--text-muted)' }} unit=" kW" />
                   <Tooltip content={<TimelineTooltip />} />
-                  <ReferenceLine x={currentPred.hourStr} stroke="rgba(0,255,136,0.6)" strokeDasharray="3 3" label={{ position: 'top', value: 'NOW', fill: '#00FF88', fontSize: 10 }} />
-                  <Area type="stepAfter" dataKey="predicted_kw" stroke="#fff" strokeWidth={1} fillOpacity={1} fill="url(#colorKw)" />
+                  <ReferenceLine x={currentPred.hourStr} stroke="var(--primary-glow)" strokeDasharray="3 3" label={{ position: 'top', value: 'NOW', fill: 'var(--primary)', fontSize: 10 }} />
+                  <Area type="stepAfter" dataKey="predicted_kw" stroke="var(--text-base)" strokeWidth={1} fillOpacity={1} fill="url(#colorKw)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
           </div>
 
           {/* SECTION 5: Model Stats Footer */}
-          <div className="glass-card" style={{ padding: '12px 16px', fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', lineHeight: '1.4' }}>
+          <div className="glass-card" style={{ padding: '12px 16px', fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: '1.4' }}>
             📊 <strong>Model Details:</strong> XGBoost Classifier | Features: 18 (hour, temperature, solar irradiance, wind speed, humidity, lag-1 load, lag-2 solar...) | Training samples: 500 rows | CV Accuracy: 99.9% | Data: Kaggle Renewable Energy Dataset
           </div>
 
